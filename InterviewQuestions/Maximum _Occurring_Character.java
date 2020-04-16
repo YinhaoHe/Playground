@@ -26,7 +26,7 @@ class solution {
 		// Find the max one
 		for (int i = 0; i < len; i ++) {
 			if (count[str.cahrAt(i)] > max) {
-				max = count[str.charAt(i)];
+				max = count[str.charAt(i)]; // make sure the first one will be return when two equal values exist
 				ans = str.charAt(i);
 			}
 		}
