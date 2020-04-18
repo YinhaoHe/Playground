@@ -1,0 +1,6 @@
+name = "yinhao-worker"
+type = "javascript"
+account_id = "bc2665dc01d408072715f5549d6cce82"
+workers_dev = true
+route = ""
+zone_id = ""
