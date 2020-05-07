@@ -1,6 +1,5 @@
 ## `Whiteboard` 1.0
 
-<<<<<<< HEAD
 Author: Yinhao He
 
 Version: 1.0
@@ -14,6 +13,7 @@ Version: 1.0
 - Clear screen
 - Take a screenshot and download
 - Give feedback to the author
+![image](https://github.com/ArdentLabs/milestone-1-YinhaoHe/blob/master/demo/whiteboard1.0.jpg?raw=true)
 
 ### User Manual:
 
@@ -32,9 +32,8 @@ Version: 1.0
 - Feedback:
   - Left click feedback button, and you will be redrict to author's github page.
   - You are very welcomed to start a pull request.
-=======
-- Ask for access to Timesheet(count the Intern work hours)
-- Sign agreement mentioned on last meeting
-- Find out where to get the ScratchPad app code
-- Clarify whether build up or modify the code from ScratchPad
->>>>>>> b17ef7aa55b883974cc88368d3dc21ffe25fc652
+
+### To do lists:
+
+- Add pop up page as user manual
+- Add color selector for users to have more color choices
