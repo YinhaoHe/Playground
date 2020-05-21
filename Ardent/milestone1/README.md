@@ -1,5 +1,7 @@
 ## `Whiteboard` 1.0
 
+## [Try it](https://yinhaohe.github.io/Whiteboard/)
+
 Author: Yinhao He
 
 Version: 1.0
