@@ -32,3 +32,7 @@ x !== 1;
 
 let points = 90;
 let type = points > 100 ? "gold" : "sliver";
+
+// Falsy
+// underfined, null, 0, false, '', NaN
+// Anything that is not Falsy -> Truthy
