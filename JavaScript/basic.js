@@ -36,3 +36,19 @@ let type = points > 100 ? "gold" : "sliver";
 // Falsy
 // underfined, null, 0, false, '', NaN
 // Anything that is not Falsy -> Truthy
+
+// Bitwise OR
+1 | 2; // equal 3
+// Bitwise AND
+1 & 2; // euqal 4
+
+// for in loop 遍历obj中的properties
+for (let key in person) {
+  console.log(key, person[key]);
+}
+
+// for of loop 遍历数组
+const colors = ["red", "yellow", "blue"];
+for (let color of colors) {
+  console.log(color);
+}
