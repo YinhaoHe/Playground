@@ -68,3 +68,5 @@ Object.keys() 只能返回 instance member
 for (let key in c1) console.log(key) 可以返回所有 members 包括 instance 和 prototype
 
 #### Use Mixins to implement compositions
+
+Object.assign() 使用这个 method 去把一个 obj 中的 method 和 properties 到另外一个 obj
