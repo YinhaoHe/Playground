@@ -102,3 +102,114 @@ class Circle {
 
 在 constructor 里面定义的函数会在 obj 里面
 所有 class 里定义的函数都会在这个 obj 的 prototype 里面
+
+#### class hoisting
+
+ES6 中的 class 不能被 hoisting 所以调用一个“类” 一定要在类的声明之后
+
+#### Static methods
+
+Static Method
+availibe on the class itself
+Often utility function that are not specific to an Obj
+
+E.G.
+
+```
+const newC = Circle.parse('{ "radius": 1 }');
+Math.abs()
+```
+
+#### private members in ES6
+
+- use Symbol()
+  无法直接访问 obj 里的 property
+
+```
+const _radius = Symbol();
+const _draw = Symbol();
+
+class Circle {
+  constructor(radius) {
+    // this.radius = radius;
+    // this["radius"] = radius;
+    this[_radius] = radius;
+  }
+
+  [_draw]() {}
+}
+```
+
+- use WeakMap()
+
+```
+const _radius = new WeakMap();
+const _move = new WeakMap();
+
+class Circle {
+  constructor(radius) {
+    _radius.set(this, radius);
+
+    _move.set(this, () => {
+      console.log("move", this);
+    });
+  }
+
+  draw() {
+    console.log(_radius.get(this));
+    _move.get(this)();
+  }
+}
+```
+
+### ES6 getter setter
+
+```
+const _radius = new WeakMap();
+
+class Circle {
+  constructor(radius) {
+    _radius.set(this, radius);
+  }
+
+  get radius() {
+    return _radius.get(this);
+  }
+
+  set radius(value) {
+    if (value <= 0) throw new Error("Invalid radius");
+    _radius.set(this, value);
+  }
+}
+```
+
+### ES6 extend
+
+当孩子类 继承了 父亲类时 如果想在孩子类中定义构造函数 就要用到 super 去先调用父亲类的构造函数 才可以定义孩子类的构造函数 不然会报错 例子如下
+Circle 类 继承了 Shape 类 当要在 Circle 中定义构造函数时 务必要使用 super 先调用父亲的构造函数
+
+```
+class Shape {
+  constructor(color) {
+    this.color = color;
+  }
+  move() {
+    console.log("move");
+  }
+}
+
+class Circle extends Shape {
+  constructor(color, radius) {
+    super(color);
+    this.radius = radius;
+  }
+  draw() {
+    console.log("draw");
+  }
+}
+```
+
+### ES6 method overwrite
+
+- 直接在孩子类 derived class 中重写对应函数即可
+- 如果想使用父亲类中的函数 那么就要用 super.move() 使用 super 关键字点对应函数即可访问当前 obj 的 prototype 中的对应函数
