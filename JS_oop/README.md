@@ -213,3 +213,29 @@ class Circle extends Shape {
 
 - 直接在孩子类 derived class 中重写对应函数即可
 - 如果想使用父亲类中的函数 那么就要用 super.move() 使用 super 关键字点对应函数即可访问当前 obj 的 prototype 中的对应函数
+
+### CommonJS Modules **Used in Node.js**
+
+- module.exports.Circle = Circle;
+- const Circle = require("./circle");
+
+### ES6 Modules
+
+- export class Circle {}
+- import { Circle } from "./circle.js";
+
+### Babel
+
+Babel 是用来把 ES6 code 翻译成 ES5 等等 兼容各个浏览器 并且去掉所有的空格等等不必要的东西 并且实现文件的压缩 的一个工具
+
+- babel-cli 是 commend line interface
+- babel-core 是 core babel 的具体操作逻辑
+- babel-preset 是用来让 babel 认识 ES6 里面的新的 feature 这个 preset 包含了 ES6 之后的所有 new features
+
+## real world work flow
+
+### Webpack
+
+webpack-cli init
+script: "webpack -w" any change 自动 bundle
+用来打包文件
