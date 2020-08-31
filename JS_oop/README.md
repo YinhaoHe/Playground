@@ -1,3 +1,5 @@
+### ES6 中如何写继承
+
 #### 4 Pillars in OOP
 
 Encapsulation: group related variables, functions that opreate on them into objects. 把所有相关的变量和函数封装在一个对象中
@@ -70,3 +72,33 @@ for (let key in c1) console.log(key) 可以返回所有 members 包括 instance 
 #### Use Mixins to implement compositions
 
 Object.assign() 使用这个 method 去把一个 obj 中的 method 和 properties 到另外一个 obj
+
+```
+function mixin(target, ...sources) {
+  Object.assign(target, ...sources);
+}
+
+function Person() {}
+// Object.assign(Person.prototype, canEat, canWalk);
+mixin(Person.prototype, canEat, canWalk);
+const person = new Person();
+```
+
+### ES6 中 class 的概念
+
+```
+class Circle {
+  constructor(radius) {
+    // 在constructor里面定义的函数会在obj里面
+    this.radius = radius;
+    this.move = function () {};
+  }
+  // 所有class里定义的函数都会在这个obj的prototype里面
+  draw() {
+    console.log("draw");
+  }
+}
+```
+
+在 constructor 里面定义的函数会在 obj 里面
+所有 class 里定义的函数都会在这个 obj 的 prototype 里面
