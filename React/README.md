@@ -135,3 +135,21 @@ handleIncrement = (product) => {
   Increment
 </button>;
 ```
+
+### JSX return
+
+JSX 的 return 里应该只能 return 一个 element 如果想 return 两个以上 element 他们就要有一个 parent
+
+```js
+return (
+  <React.Fragment>
+    <p>Showing {movieCount} movies in the database</p>
+    <table className="table">
+      <thead>
+        <tr>...</tr>
+      </thead>
+      <tbody>...</tbody>
+    </table>
+  </React.Fragment>
+);
+```
