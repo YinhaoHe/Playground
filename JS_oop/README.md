@@ -42,7 +42,7 @@ Prototypical: JS 中每一个 obj 都会 link 继承到一个 base obj 中 这�
 
 #### Descriptor
 
-```
+```js
 Object.defineProperty(person, "name", {
   writable: false,
   enumerable: false,
@@ -73,7 +73,7 @@ for (let key in c1) console.log(key) 可以返回所有 members 包括 instance 
 
 Object.assign() 使用这个 method 去把一个 obj 中的 method 和 properties 到另外一个 obj
 
-```
+```js
 function mixin(target, ...sources) {
   Object.assign(target, ...sources);
 }
@@ -86,7 +86,7 @@ const person = new Person();
 
 ### ES6 中 class 的概念
 
-```
+```js
 class Circle {
   constructor(radius) {
     // 在constructor里面定义的函数会在obj里面
@@ -115,9 +115,9 @@ Often utility function that are not specific to an Obj
 
 E.G.
 
-```
+```js
 const newC = Circle.parse('{ "radius": 1 }');
-Math.abs()
+Math.abs();
 ```
 
 #### private members in ES6
@@ -125,7 +125,7 @@ Math.abs()
 - use Symbol()
   无法直接访问 obj 里的 property
 
-```
+```js
 const _radius = Symbol();
 const _draw = Symbol();
 
@@ -142,7 +142,7 @@ class Circle {
 
 - use WeakMap()
 
-```
+```js
 const _radius = new WeakMap();
 const _move = new WeakMap();
 
@@ -164,7 +164,7 @@ class Circle {
 
 ### ES6 getter setter
 
-```
+```js
 const _radius = new WeakMap();
 
 class Circle {
@@ -188,7 +188,7 @@ class Circle {
 当孩子类 继承了 父亲类时 如果想在孩子类中定义构造函数 就要用到 super 去先调用父亲类的构造函数 才可以定义孩子类的构造函数 不然会报错 例子如下
 Circle 类 继承了 Shape 类 当要在 Circle 中定义构造函数时 务必要使用 super 先调用父亲的构造函数
 
-```
+```js
 class Shape {
   constructor(color) {
     this.color = color;
