@@ -2,7 +2,7 @@
 
 Constructor:
 
-```
+```js
 function Circle(radius) {
   this.radius = radius;
   this.draw = function () {
@@ -13,7 +13,7 @@ function Circle(radius) {
 
 Factory:
 
-```
+```js
 function createCircle(radius) {
   return {
     radius,
