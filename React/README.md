@@ -16,7 +16,7 @@ Firebase 成型的后端服务 google 注册账号就能直接使用
 
 #### Binding this and arrow function
 
-```
+```js
 const person = {
   name: "Yinhao",
   walk() {
@@ -36,7 +36,7 @@ walk();
 
 - 对于独立的函数调用 **用到 callback 函数 都要记住 always use arrow function!!!!!!!!**
 
-```
+```js
 const person = {
   name: "Yinhao",
   setTimeout(() => {
@@ -55,9 +55,11 @@ person.talk()
 
 - \${color}
 
-```
-const colors = ['red', 'green', 'blue'];
-const items = color.map((color) => {`<li>${color}</li>`})
+```js
+const colors = ["red", "green", "blue"];
+const items = color.map((color) => {
+  `<li>${color}</li>`;
+});
 ```
 
 #### Obj destructuring
@@ -78,7 +80,7 @@ e.g. import React, { Component } from 'react;
 
 如果同时在 return 里有不止一种 tag 需要返回 需要用到 react.Fragment 实现每一个 tag 都有一个父亲
 
-```
+```js
 class Counter extends Component {
   render() {
     return (
@@ -96,17 +98,17 @@ class Counter extends Component {
 两种方法 bind event handler 用来解决 this 无法找到 obj 的问题
 Always 使用 arrow function
 
-```
+```js
     constructor() {
       super();
       this.handleIncrement = this.handleIncrement.bind(this);
     }
 ```
 
-```
+```js
 handleIncrement = () => {
-    console.log("Increment Clicked", this);
-  };
+  console.log("Increment Clicked", this);
+};
 ```
 
 ### Update State
@@ -118,19 +120,18 @@ handleIncrement = () => {
 
 传入无参箭头函数实现
 
-```
+```js
 handleIncrement = (product) => {
-    console.log(product);
-    this.setState({ count: this.state.count + 1 });
+  console.log(product);
+  this.setState({ count: this.state.count + 1 });
 };
 
 <button
   onClick={() => {
-  this.handleIncrement(product);
+    this.handleIncrement(product);
   }}
   className="btn btn-secondary btn-sm"
 >
   Increment
-</button>
-
+</button>;
 ```
