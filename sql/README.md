@@ -373,11 +373,11 @@ LEFT JOIN employees m
 
 ### USING Clause
 
-- 在 ON 后面 condition 里面 如果两个表的对应列的名字完全一样 可以使用USING keyword去简化代码 
+- 在 ON 后面 condition 里面 如果两个表的对应列的名字完全一样 可以使用 USING keyword 去简化代码
 - 当对应两个列名字不完全相同时不能使用
 
 ```sql
-SELECT 
+SELECT
 		o.order_id,
     c.first_name,
     sh.name AS shipper
@@ -387,7 +387,7 @@ JOIN customers c
     USING (customer_id)
 LEFT JOIN shippers sh
 		USING (shipper_id)
-		
+
 -- JOIN 联合主键的表 使用 USING keyword
 SELECT *
 FROM order_items oi
@@ -395,11 +395,11 @@ JOIN order_item_notes oin
 		-- ON oi.order_id = oin.order_id AND oi.product_id = oin.product_id
     -- 使用 USING keyword 简化代码
     USING (order_id, product_id)
-    
+
 -- E.G.
 USE sql_invoicing;
 
-SELECT 
+SELECT
 	p.date,
 	c.name AS client,
 	p.amount,
@@ -413,7 +413,7 @@ JOIN payment_methods pm
 ### NATURAL JOIN
 
 - NEVER USE THIS
-- sql会自动的找到对应的表中相同的列 然后join 一起 很危险 不要用
+- sql 会自动的找到对应的表中相同的列 然后 join 一起 很危险 不要用
 
 ```sql
 SELECT
@@ -431,7 +431,7 @@ NATURAL JOIN customers c
 ```sql
 USE sql_store;
 
-SELECT 
+SELECT
 		c.first_name AS customer,
     p.name AS product
 -- FROM customers c, orders o
@@ -443,26 +443,26 @@ ORDER BY c.first_name
 ### UNION
 
 - combine rows 从多个表中
-- 使用UNION不仅仅可以在一个表中 结合多个行 也可以从多个不同的表中结合多个行
-- 但是要注意想要UNION的行必须要拥有相同数量的col不然就会报错
-- UNION前面的表 决定了这一列叫什么名字 如下例子2 shipper在前面 所以结果的表列名叫做name 如果 customers表在前 那么结果中表的列名就会叫first_name
+- 使用 UNION 不仅仅可以在一个表中 结合多个行 也可以从多个不同的表中结合多个行
+- 但是要注意想要 UNION 的行必须要拥有相同数量的 col 不然就会报错
+- UNION 前面的表 决定了这一列叫什么名字 如下例子 2 shipper 在前面 所以结果的表列名叫做 name 如果 customers 表在前 那么结果中表的列名就会叫 first_name
 
 ```sql
 USE sql_store;
 
-SELECT 
+SELECT
 		order_id,
     order_date,
     'Active' AS status
 FROM orders
 WHERE order_date >= '2019-01-01'
 UNION
-SELECT 
+SELECT
 		order_id,
     order_date,
     'Archived' AS status
 FROM orders
-WHERE order_date < '2019-01-01' 
+WHERE order_date < '2019-01-01'
 
 -- 例子2
 SELECT name
@@ -475,7 +475,7 @@ FROM customers
 ```sql
 USE sql_store;
 
-SELECT 
+SELECT
 		customer_id,
     first_name,
     points,
@@ -483,7 +483,7 @@ SELECT
 FROM customers
 WHERE points < 2000
 UNION
-SELECT 
+SELECT
 		customer_id,
     first_name,
     points,
@@ -491,7 +491,7 @@ SELECT
 FROM customers
 WHERE points BETWEEN 2000 AND 3000
 UNION
-SELECT 
+SELECT
 		customer_id,
     first_name,
     points,
@@ -506,7 +506,7 @@ WHERE points > 3000
 
 - Datatype
   - INT(11) 表示整数
-  - VARCHAR(50) 表示 up to 50字节 
+  - VARCHAR(50) 表示 up to 50 字节
   - CHAR(50) 固定 50 字节
 - PK - primary key
 - NN - not null
@@ -515,7 +515,7 @@ WHERE points > 3000
 
 ### INSERT INTO a single row
 
-- 如果不明确 INSERT INTO 的 cols 就需要在VALUES里面添加对应的 default 
+- 如果不明确 INSERT INTO 的 cols 就需要在 VALUES 里面添加对应的 default
 - 建议永远都明确 col 然后在下面写入对应的 VALUES
 
 ```sql
@@ -530,7 +530,7 @@ INSERT INTO customers (
     state
 )
 VALUES (
-    'John', 
+    'John',
     'Smith',
     '1990-01-01',
     'address',
@@ -541,7 +541,7 @@ VALUES (
 
 ### INSERT INTO multiple rows
 
-- 只要在VALUES后面加逗号 括号 里面添加新的值 就可以同时 INSERT INTO 多个行了
+- 只要在 VALUES 后面加逗号 括号 里面添加新的值 就可以同时 INSERT INTO 多个行了
 
 ```sql
 USE sql_store;
@@ -555,30 +555,30 @@ VALUES ('Shipper1'),
 ### INSERT Hieraichical Rows (INSERT INTO 多个 tables)
 
 - 先加入 父亲 table 里面的 record
-- 然后使用 LAST_INSERT_ID() 去找到刚加入的record的id
-- 使用这个id 再次INSERT INTO 对应的表 就可以实现 层级化的从上到下为多个tables添加record
+- 然后使用 LAST_INSERT_ID() 去找到刚加入的 record 的 id
+- 使用这个 id 再次 INSERT INTO 对应的表 就可以实现 层级化的从上到下为多个 tables 添加 record
 
 ```sql
 INSERT INTO orders (customer_id, order_date, status)
 VALUES (1, '2019-01-02', 1);
 
 INSERT INTO order_items
-VALUES 
+VALUES
 		(LAST_INSERT_ID(), 1, 1, 2.95),
     (LAST_INSERT_ID(), 2, 1, 3.95)
 ```
 
 ### Copy data from one table to another
 
-- copy过来的表会没有主键
-- mysql会直接忽略主键 自增等等属性
+- copy 过来的表会没有主键
+- mysql 会直接忽略主键 自增等等属性
 
 ```sql
 USE sql_store;
 
 CREATE TABLE orders_archived AS
 -- 以下的部分称为一个 sub query
-SELECT * 
+SELECT *
 FROM orders
 WHERE order_date < '2019-01-01'
 
@@ -617,8 +617,8 @@ WHERE invoice_id = 1
 USE sql_invoicing;
 
 UPDATE invoices
-SET 
-	payment_total = invoice_total * 0.5, 
+SET
+	payment_total = invoice_total * 0.5,
 	payment_date = due_date
 WHERE invoice_id = 3
 
@@ -626,27 +626,27 @@ WHERE invoice_id = 3
 
 ### Update Multiple rows
 
-- 修改 WHERE里面的条件 
+- 修改 WHERE 里面的条件
 - 可以使用 WHERE 中的 IN 来选择多个 records 去 update
 
 ```sql
 UPDATE invoices
-SET 
-	payment_total = invoice_total * 0.5, 
+SET
+	payment_total = invoice_total * 0.5,
 	payment_date = due_date
 WHERE client_id IN (3, 4)
 ```
 
 ### Using Subqueries in Updates
 
-- 可以使用 SELECT 做一个 sub query 获取 id 然后用这个id进行 update
+- 可以使用 SELECT 做一个 sub query 获取 id 然后用这个 id 进行 update
 
 ```sql
 UPDATE invoices
-SET 
-	payment_total = invoice_total * 0.5, 
+SET
+	payment_total = invoice_total * 0.5,
 	payment_date = due_date
-WHERE client_id IN 
+WHERE client_id IN
 			(SELECT client_id
 			FROM clients
 			WHERE state IN ('CA', 'NY'))
@@ -654,15 +654,14 @@ WHERE client_id IN
 
 ### Delete Row
 
-- 使用 DELETE FROM 
-- 同时也可以使用subquery在delete里面
+- 使用 DELETE FROM
+- 同时也可以使用 subquery 在 delete 里面
 
 ```sql
 DELETE FROM invoices
 WHERE client_id = (
-	SELECT * 
+	SELECT *
 	FROM clients
 	WHERE name = 'Myworks'
 )
 ```
-
