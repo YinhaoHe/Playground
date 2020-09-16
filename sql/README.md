@@ -7,6 +7,246 @@
 - relational db
 - NoSQL non relational db
 
+### Primary Key & Foreign Key & Composite Key
+
+- Primary key 是唯一的 用来对应一个表中唯一的元素 不可以为空
+- Foreign key 一个表里可以有多个 是用来和别的表建立关系的 一般情况的 foreign key 是别的表的 primary key
+- Composite key 是多个列（例如两个外键）结合起来共同形成一个 主键 也就是 两个主键共同确定一个 record
+
+### CREATE DATABASE
+
+```sql
+CREATE DATABASE name
+```
+
+### CREATE TABLE
+
+- INT                           *-- Whole Numbers* 
+- DECIMAL(M,N)                  *-- Decimal Numbers - Exact Value* 
+- VARCHAR(l)                    *-- String of text of length l* 
+- BLOB                          *-- Binary Large Object, Stores large data* (例如用来存储图片 文件)
+- DATE                          *-- 'YYYY-MM-DD'* 
+- TIMESTAMP                     *-- 'YYYY-MM-DD HH:MM:SS' - used for recording events*
+
+```sql
+-- Creating tables
+CREATE TABLE student (
+  student_id INT PRIMARY KEY,
+  name VARCHAR(40),
+  major VARCHAR(40)
+  -- PRIMARY KEY(student_id)
+);
+
+DESCRIBE student;
+DROP TABLE student;
+ALTER TABLE student ADD gpa DECIMAL;
+ALTER TABLE student DROP COLUMN gpa;
+```
+
+### INSERT INTO dbName(colName1, colName2) VALUES(value1, value2, 'value3') 
+
+- 由于主键不能重复 所以不能重复输入相同的记录
+
+```sql
+INSERT INTO student VALUES(1, 'Jack', 'Biology');
+INSERT INTO student VALUES(2, 'Kate', 'Sociology');
+INSERT INTO student(student_id, name) VALUES(3, 'Claire');
+INSERT INTO student VALUES(4, 'Jack', 'Biology');
+INSERT INTO student VALUES(5, 'Mike', 'Computer Science');
+```
+
+### Add Constrains when CREATE TABLE
+
+- NOT NULL - 不能为空
+- UNIQUE - 不能重复
+- DEFAULT - 设置为默认值 
+- AUTO_INCREMENT - 设置为自增
+
+```sql
+CREATE TABLE student (
+ 	student_id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(40) NOT NULL,
+  -- name VARCHAR(40) UNIQUE,
+  major VARCHAR(40) DEFAULT 'undecided',
+);
+```
+
+### UPDATE & DELETE FROM
+
+```sql
+-- Delete every record
+DELETE FROM student;
+
+-- 加条件delete
+DELETE FROM student
+WHERE student_id = 4;
+
+-- 同一句里面可以写多个 statement
+DELETE FROM student
+WHERE major = 'Sociology' AND name = 'Kate';
+
+-- 更新所有
+UPDATE student
+SET major = 'Undecided';
+
+-- 有条件更新
+UPDATE student
+SET name = 'Johnny'
+WHERE student_id = 4;
+
+UPDATE student
+SET major = 'Biological Sciences'
+WHERE major = 'Biology';
+
+UPDATE student
+SET major = 'Biosociology'
+WHERE major = 'Biology' OR major = 'sociology'
+
+UPDATE student
+SET major = 'Undecided', name = 'Tom'
+WHERE student_id = 4;
+```
+
+### CREATE a Complex Database
+
+[pdf schema](./schema/company-database.pdf)
+
+<img src="./images/labels.png" alt="labels" style="zoom:100%;" />
+
+![employSchema](./images/employSchema.png)
+
+![clientSchema](./images/clientSchema.png)
+
+![branchSchema](./images/branchSchema.png)
+
+![branchSupplierSchema](./images/branchSupplierSchema.png)
+
+![works_withSchema](./images/works_withSchema.png)
+
+```sql
+ CREATE TABLE employee (
+  emp_id INT PRIMARY KEY,
+  first_name VARCHAR(40),
+  last_name VARCHAR(40),
+  birth_day DATE,
+  sex VARCHAR(1),
+  salary INT,
+  super_id INT,
+  branch_id INT
+);
+
+CREATE TABLE branch (
+  branch_id INT PRIMARY KEY,
+  branch_name VARCHAR(40),
+  mgr_id INT,
+  mgr_start_date DATE,
+  FOREIGN KEY(mgr_id) REFERENCES employee(emp_id) ON DELETE SET NULL
+);
+
+ALTER TABLE employee
+ADD FOREIGN KEY(branch_id)
+REFERENCES branch(branch_id)
+ON DELETE SET NULL;
+
+ALTER TABLE employee
+ADD FOREIGN KEY(super_id)
+REFERENCES employee(emp_id)
+ON DELETE SET NULL;
+
+CREATE TABLE client (
+  client_id INT PRIMARY KEY,
+  client_name VARCHAR(40),
+  branch_id INT,
+  FOREIGN KEY(branch_id) REFERENCES branch(branch_id) ON DELETE SET NULL
+);
+
+CREATE TABLE works_with (
+  emp_id INT,
+  client_id INT,
+  total_sales INT,
+  PRIMARY KEY(emp_id, client_id),
+  FOREIGN KEY(emp_id) REFERENCES employee(emp_id) ON DELETE CASCADE,
+  FOREIGN KEY(client_id) REFERENCES client(client_id) ON DELETE CASCADE
+);
+
+CREATE TABLE branch_supplier (
+  branch_id INT,
+  supplier_name VARCHAR(40),
+  supply_type VARCHAR(40),
+  PRIMARY KEY(branch_id, supplier_name),
+  FOREIGN KEY(branch_id) REFERENCES branch(branch_id) ON DELETE CASCADE
+);
+
+
+-- -----------------------------------------------------------------------------
+
+-- Corporate
+INSERT INTO employee VALUES(100, 'David', 'Wallace', '1967-11-17', 'M', 250000, NULL, NULL);
+
+INSERT INTO branch VALUES(1, 'Corporate', 100, '2006-02-09');
+
+UPDATE employee
+SET branch_id = 1
+WHERE emp_id = 100;
+
+INSERT INTO employee VALUES(101, 'Jan', 'Levinson', '1961-05-11', 'F', 110000, 100, 1);
+
+-- Scranton
+INSERT INTO employee VALUES(102, 'Michael', 'Scott', '1964-03-15', 'M', 75000, 100, NULL);
+
+INSERT INTO branch VALUES(2, 'Scranton', 102, '1992-04-06');
+
+UPDATE employee
+SET branch_id = 2
+WHERE emp_id = 102;
+
+INSERT INTO employee VALUES(103, 'Angela', 'Martin', '1971-06-25', 'F', 63000, 102, 2);
+INSERT INTO employee VALUES(104, 'Kelly', 'Kapoor', '1980-02-05', 'F', 55000, 102, 2);
+INSERT INTO employee VALUES(105, 'Stanley', 'Hudson', '1958-02-19', 'M', 69000, 102, 2);
+
+-- Stamford
+INSERT INTO employee VALUES(106, 'Josh', 'Porter', '1969-09-05', 'M', 78000, 100, NULL);
+
+INSERT INTO branch VALUES(3, 'Stamford', 106, '1998-02-13');
+
+UPDATE employee
+SET branch_id = 3
+WHERE emp_id = 106;
+
+INSERT INTO employee VALUES(107, 'Andy', 'Bernard', '1973-07-22', 'M', 65000, 106, 3);
+INSERT INTO employee VALUES(108, 'Jim', 'Halpert', '1978-10-01', 'M', 71000, 106, 3);
+
+
+-- BRANCH SUPPLIER
+INSERT INTO branch_supplier VALUES(2, 'Hammer Mill', 'Paper');
+INSERT INTO branch_supplier VALUES(2, 'Uni-ball', 'Writing Utensils');
+INSERT INTO branch_supplier VALUES(3, 'Patriot Paper', 'Paper');
+INSERT INTO branch_supplier VALUES(2, 'J.T. Forms & Labels', 'Custom Forms');
+INSERT INTO branch_supplier VALUES(3, 'Uni-ball', 'Writing Utensils');
+INSERT INTO branch_supplier VALUES(3, 'Hammer Mill', 'Paper');
+INSERT INTO branch_supplier VALUES(3, 'Stamford Lables', 'Custom Forms');
+
+-- CLIENT
+INSERT INTO client VALUES(400, 'Dunmore Highschool', 2);
+INSERT INTO client VALUES(401, 'Lackawana Country', 2);
+INSERT INTO client VALUES(402, 'FedEx', 3);
+INSERT INTO client VALUES(403, 'John Daly Law, LLC', 3);
+INSERT INTO client VALUES(404, 'Scranton Whitepages', 2);
+INSERT INTO client VALUES(405, 'Times Newspaper', 3);
+INSERT INTO client VALUES(406, 'FedEx', 2);
+
+-- WORKS_WITH
+INSERT INTO works_with VALUES(105, 400, 55000);
+INSERT INTO works_with VALUES(102, 401, 267000);
+INSERT INTO works_with VALUES(108, 402, 22500);
+INSERT INTO works_with VALUES(107, 403, 5000);
+INSERT INTO works_with VALUES(108, 403, 12000);
+INSERT INTO works_with VALUES(105, 404, 33000);
+INSERT INTO works_with VALUES(107, 405, 26000);
+INSERT INTO works_with VALUES(102, 406, 15000);
+INSERT INTO works_with VALUES(105, 406, 130000);
+```
+
 ### SELECT
 
 - 可以使用加减乘除
@@ -325,7 +565,7 @@ ORDER BY c.customer_id
 
 ```sql
 SELECT
-	c.customer_id,
+		c.customer_id,
     c.first_name,
     o.order_id,
     sh.name AS shipper
@@ -338,7 +578,7 @@ ORDER BY c.customer_ID
 
 -- join多个表 例子
 SELECT
-	o.order_id,
+		o.order_id,
     o.order_date,
     c.first_name AS customer,
     sh.name AS shipper,
@@ -363,7 +603,7 @@ ORDER BY o.order_id
 USE sql_hr;
 
 SELECT
-	e.employee_id,
+		e.employee_id,
     e.first_name,
     m.first_name AS manager
 FROM employees e
@@ -665,3 +905,47 @@ WHERE client_id = (
 	WHERE name = 'Myworks'
 )
 ```
+
+- [SQL](#sql)
+  * [DBMS](#dbms)
+  * [Primary Key & Foreign Key & Composite Key](#primary-key---foreign-key---composite-key)
+  * [CREATE DATABASE](#create-database)
+  * [CREATE TABLE](#create-table)
+  * [INSERT INTO dbName(colName1, colName2) VALUES(value1, value2, 'value3')](#insert-into-dbname-colname1--colname2--values-value1--value2---value3--)
+  * [Add Constrains when CREATE TABLE](#add-constrains-when-create-table)
+  * [UPDATE & DELETE FROM](#update---delete-from)
+  * [CREATE a Complex Database](#create-a-complex-database)
+  * [SELECT](#select)
+  * [WHERE](#where)
+  * [Combined search AND OR NOT](#combined-search-and-or-not)
+  * [IN](#in)
+  * [BETWEEN](#between)
+  * [LIKE](#like)
+  * [REGEXP](#regexp)
+  * [IS NULL](#is-null)
+  * [ORDER BY Clause](#order-by-clause)
+  * [LIMIT Clause](#limit-clause)
+  * [JOIN (INNER JOIN) INNER 可以省略](#join--inner-join--inner-----)
+  * [Combine columns from tables across Databases](#combine-columns-from-tables-across-databases)
+  * [SELF JOIN](#self-join)
+  * [Join Multiple Tables](#join-multiple-tables)
+  * [Composite primary key JOIN table](#composite-primary-key-join-table)
+  * [Implicit join syntax](#implicit-join-syntax)
+  * [LEFT JOIN RIGHT JOIN (OUTER JOIN) OUTER 可以省略](#left-join-right-join--outer-join--outer-----)
+  * [Outer join in multiple tables](#outer-join-in-multiple-tables)
+  * [Self OUTTER JOIN](#self-outter-join)
+  * [USING Clause](#using-clause)
+  * [NATURAL JOIN](#natural-join)
+  * [CROSS JOIN](#cross-join)
+  * [UNION](#union)
+  * [Column attributes](#column-attributes)
+  * [INSERT INTO a single row](#insert-into-a-single-row)
+  * [INSERT INTO multiple rows](#insert-into-multiple-rows)
+  * [INSERT Hieraichical Rows (INSERT INTO 多个 tables)](#insert-hieraichical-rows--insert-into----tables-)
+  * [Copy data from one table to another](#copy-data-from-one-table-to-another)
+  * [Update a single row](#update-a-single-row)
+  * [Update Multiple rows](#update-multiple-rows)
+  * [Using Subqueries in Updates](#using-subqueries-in-updates)
+  * [Delete Row](#delete-row)
+
+https://github.com/ekalinin/github-markdown-toc)
