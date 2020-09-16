@@ -947,5 +947,3 @@ WHERE client_id = (
   * [Update Multiple rows](#update-multiple-rows)
   * [Using Subqueries in Updates](#using-subqueries-in-updates)
   * [Delete Row](#delete-row)
-
-https://github.com/ekalinin/github-markdown-toc)
