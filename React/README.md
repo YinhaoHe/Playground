@@ -1,18 +1,52 @@
-### React
+# React
+
+* [React Angular](#react-angular)
+* [Custom configs](#custom-configs)
+* [React backend](#react-backend)
+* [React related JS](#react-related-js)
+  + [Binding this and arrow function](#binding-this-and-arrow-function)
+  + [Array map Method](#array-map-method)
+  + [Obj destructuring](#obj-destructuring)
+  + [2 kinds of exports: Named Exports and Default Exports](#2-kinds-of-exports-named-exports-and-default-exports)
+* [Specify children](#specify-children)
+* [Bind event handles](#bind-event-handles)
+* [Update State](#update-state)
+* [Passing Event Arguments](#passing-event-arguments)
+* [JSX return](#jsx-return)
+
+---
+
+### React Angular
 
 The reason react is called react because it reacts to the state.
 
 Angular is a framework. React is a library only used for view. Users can choose the routing or different framework to use for React.
 
+[Back to top](#react)
+
+---
+
 ### Custom configs
 
 npm eject 会把所有 dependency 暴露出来 注意这个是 one way 的 一旦 eject 不能回来 DO NOT DO THIS
 
-### 搭配 React 的后端
+[Back to top](#react)
+
+---
+
+### React backend
 
 C#/.NET
 **Node.js Express**
 Firebase 成型的后端服务 google 注册账号就能直接使用
+
+[Back to top](#react)
+
+---
+
+### React related JS
+
+Recap of some highly used JS in React
 
 #### Binding this and arrow function
 
@@ -47,7 +81,11 @@ const person = {
 person.talk()
 ```
 
-#### Array.map Method
+[Back to top](#react)
+
+---
+
+#### Array map Method
 
 - template literal
 
@@ -62,6 +100,10 @@ const items = color.map((color) => {
 });
 ```
 
+[Back to top](#react)
+
+---
+
 #### Obj destructuring
 
 const { street, city, country } = address;
@@ -69,12 +111,20 @@ const { street, city, country } = address;
 const { street: st } = address;
 把 obj address 中的 street property 取出来放进一个叫 st 的 const 里面
 
-#### 两种 exports Named Exports and Default Exports
+[Back to top](#react)
+
+---
+
+#### 2 kinds of exports: Named Exports and Default Exports
 
 - Default -> import ... from '';
 - Named -> import { ... } from '';
 
-e.g. import React, { Component } from 'react;
+e.g. import React, { Component } from 'react';
+
+[Back to top](#react)
+
+---
 
 ### Specify children
 
@@ -92,6 +142,10 @@ class Counter extends Component {
   }
 }
 ```
+
+[Back to top](#react)
+
+---
 
 ### Bind event handles
 
@@ -111,10 +165,18 @@ handleIncrement = () => {
 };
 ```
 
+[Back to top](#react)
+
+---
+
 ### Update State
 
 - React 不能自动 update 的 change Angular 可以 因为 input 等等的变化都是 monkey patch 的 Angular 可以实时监测任何变化
 - React 里面我们要使用 setState() 来修改 state 这个过程 react 会自动同步 DOM 和 virtual DOM 保持 view 的一致
+
+[Back to top](#react)
+
+---
 
 ### Passing Event Arguments
 
@@ -136,6 +198,10 @@ handleIncrement = (product) => {
 </button>;
 ```
 
+[Back to top](#react)
+
+---
+
 ### JSX return
 
 JSX 的 return 里应该只能 return 一个 element 如果想 return 两个以上 element 他们就要有一个 parent
@@ -153,3 +219,7 @@ return (
   </React.Fragment>
 );
 ```
+
+[Back to top](#react)
+
+---
