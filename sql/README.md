@@ -1,11 +1,56 @@
 ## SQL
 
-- **NOT CASE SENSITIVE**
+**NOT CASE SENSITIVE**
+
+* [DBMS](#dbms)
+* [Primary Key & Foreign Key & Composite Key](#primary-key---foreign-key---composite-key)
+* [CREATE DATABASE](#create-database)
+* [CREATE TABLE](#create-table)
+* [INSERT INTO dbName(colName1, colName2) VALUES(value1, value2, 'value3')](#insert-into-dbname-colname1--colname2--values-value1--value2---value3--)
+* [Add Constrains when CREATE TABLE](#add-constrains-when-create-table)
+* [UPDATE & DELETE FROM](#update-&-delete-from)
+* [CREATE a Complex Database](#create-a-complex-database)
+* [SELECT](#select)
+* [WHERE](#where)
+* [Combined search AND OR NOT](#combined-search-and-or-not)
+* [IN](#in)
+* [BETWEEN](#between)
+* [LIKE](#like)
+* [REGEXP](#regexp)
+* [IS NULL](#is-null)
+* [ORDER BY Clause](#order-by-clause)
+* [LIMIT Clause](#limit-clause)
+* [JOIN (INNER JOIN) INNER 可以省略](#join-inner-join-inner-可以省略)
+* [Combine columns from tables across Databases](#combine-columns-from-tables-across-databases)
+* [SELF JOIN](#self-join)
+* [Join Multiple Tables](#join-multiple-tables)
+* [Composite primary key JOIN table](#composite-primary-key-join-table)
+* [Implicit join syntax](#implicit-join-syntax)
+* [LEFT JOIN RIGHT JOIN (OUTER JOIN) OUTER 可以省略](#left-join-right-join--outer-join--outer-----)
+* [Outer join in multiple tables](#outer-join-in-multiple-tables)
+* [Self OUTTER JOIN](#self-outter-join)
+* [USING Clause](#using-clause)
+* [NATURAL JOIN](#natural-join)
+* [CROSS JOIN](#cross-join)
+* [UNION](#union)
+* [Column attributes](#column-attributes)
+* [INSERT INTO a single row](#insert-into-a-single-row)
+* [INSERT INTO multiple rows](#insert-into-multiple-rows)
+* [INSERT Hieraichical Rows (INSERT INTO 多个 tables)](#insert-hieraichical-rows--insert-into----tables-)
+* [Copy data from one table to another](#copy-data-from-one-table-to-another)
+* [Update a single row](#update-a-single-row)
+* [Update Multiple rows](#update-multiple-rows)
+* [Using Subqueries in Updates](#using-subqueries-in-updates)
+* [Delete Row](#delete-row)
 
 ### DBMS
 
 - relational db
 - NoSQL non relational db
+
+[Back to top](#sql)
+
+---
 
 ### Primary Key & Foreign Key & Composite Key
 
@@ -13,11 +58,19 @@
 - Foreign key 一个表里可以有多个 是用来和别的表建立关系的 一般情况的 foreign key 是别的表的 primary key
 - Composite key 是多个列（例如两个外键）结合起来共同形成一个 主键 也就是 两个主键共同确定一个 record
 
+[Back to top](#sql)
+
+---
+
 ### CREATE DATABASE
 
 ```sql
 CREATE DATABASE name
 ```
+
+[Back to top](#sql)
+
+---
 
 ### CREATE TABLE
 
@@ -43,6 +96,10 @@ ALTER TABLE student ADD gpa DECIMAL;
 ALTER TABLE student DROP COLUMN gpa;
 ```
 
+[Back to top](#sql)
+
+---
+
 ### INSERT INTO dbName(colName1, colName2) VALUES(value1, value2, 'value3') 
 
 - 由于主键不能重复 所以不能重复输入相同的记录
@@ -54,6 +111,10 @@ INSERT INTO student(student_id, name) VALUES(3, 'Claire');
 INSERT INTO student VALUES(4, 'Jack', 'Biology');
 INSERT INTO student VALUES(5, 'Mike', 'Computer Science');
 ```
+
+[Back to top](#sql)
+
+---
 
 ### Add Constrains when CREATE TABLE
 
@@ -70,6 +131,10 @@ CREATE TABLE student (
   major VARCHAR(40) DEFAULT 'undecided',
 );
 ```
+
+[Back to top](#sql)
+
+---
 
 ### UPDATE & DELETE FROM
 
@@ -106,6 +171,10 @@ UPDATE student
 SET major = 'Undecided', name = 'Tom'
 WHERE student_id = 4;
 ```
+
+[Back to top](#sql)
+
+---
 
 ### CREATE a Complex Database
 
@@ -247,6 +316,10 @@ INSERT INTO works_with VALUES(102, 406, 15000);
 INSERT INTO works_with VALUES(105, 406, 130000);
 ```
 
+[Back to top](#sql)
+
+---
+
 ### SELECT
 
 - 可以使用加减乘除
@@ -271,6 +344,10 @@ SELECT DISTINCT state
 FROM customers
 ```
 
+[Back to top](#sql)
+
+---
+
 ### WHERE
 
 - 用于选择条件
@@ -293,6 +370,10 @@ FROM customers
 WHERE birth_date > '1990-01-01'
 ```
 
+[Back to top](#sql)
+
+---
+
 ### Combined search AND OR NOT
 
 - AND 优先级高于 OR
@@ -303,6 +384,10 @@ SELECT *
 FROM Customers
 WHERE birth_date > '1990-01-01' OR points > 1000;
 ```
+
+[Back to top](#sql)
+
+---
 
 ### IN
 
@@ -319,6 +404,10 @@ FROM Customers
 WHERE state NOT IN ('VA', 'FL', 'GA')
 ```
 
+[Back to top](#sql)
+
+---
+
 ### BETWEEN
 
 - 在两个数值区间选择
@@ -329,6 +418,10 @@ SELECT *
 FROM Customers
 WHERE points BETWEEN 1000 AND 3000
 ```
+
+[Back to top](#sql)
+
+---
 
 ### LIKE
 
@@ -346,6 +439,10 @@ SELECT *
 FROM Customers
 WHERE last_name NOT LIKE 'b___y'
 ```
+
+[Back to top](#sql)
+
+---
 
 ### REGEXP
 
@@ -368,6 +465,10 @@ WHERE last_name REGEXP 'field'
 -- [a-f]
 ```
 
+[Back to top](#sql)
+
+---
+
 ### IS NULL
 
 - 判断空字段
@@ -382,6 +483,10 @@ SELECT *
 FROM Customers
 WHERE phone IS NOT NULL
 ```
+
+[Back to top](#sql)
+
+---
 
 ### ORDER BY Clause
 
@@ -410,6 +515,10 @@ FROM Customers
 ORDER BY state DESC
 ```
 
+[Back to top](#sql)
+
+---
+
 ### LIMIT Clause
 
 - 限制显示的数量 前 300 个
@@ -425,6 +534,10 @@ SELECT *
 FROM Customers
 LIMIT 6, 3
 ```
+
+[Back to top](#sql)
+
+---
 
 ### JOIN (INNER JOIN) INNER 可以省略
 
@@ -454,6 +567,10 @@ JOIN customers c
 	ON o.customer_id = c.customer_id
 ```
 
+[Back to top](#sql)
+
+---
+
 ### Combine columns from tables across Databases
 
 - 只需要给非当前使用的 DB 加 table 的 prefix
@@ -475,6 +592,10 @@ JOIN products p
 	ON oi.product_id = p.product_id
 ```
 
+[Back to top](#sql)
+
+---
+
 ### SELF JOIN
 
 - 与两个 table join 几乎相同
@@ -492,6 +613,10 @@ FROM employees e
 JOIN employees m
 	ON e.reports_to = m.employee_id
 ```
+
+[Back to top](#sql)
+
+---
 
 ### Join Multiple Tables
 
@@ -513,6 +638,10 @@ JOIN order_statuses os
 	ON o.status = os.order_status_id
 ```
 
+[Back to top](#sql)
+
+---
+
 ### Composite primary key JOIN table
 
 - 两个主键同时用 对应一个 record
@@ -529,6 +658,10 @@ JOIN order_item_notes oin
 
 ```
 
+[Back to top](#sql)
+
+---
+
 ### Implicit join syntax
 
 - **NEVER USE THIS**
@@ -538,6 +671,10 @@ SELECT *
 FROM orders o, customers c
 WHERE o.customer_id = c.customer_id
 ```
+
+[Back to top](#sql)
+
+---
 
 ### LEFT JOIN RIGHT JOIN (OUTER JOIN) OUTER 可以省略
 
@@ -556,6 +693,10 @@ LEFT JOIN orders o
 	ON c.customer_id = o.customer_id
 ORDER BY c.customer_id
 ```
+
+[Back to top](#sql)
+
+---
 
 ### Outer join in multiple tables
 
@@ -593,6 +734,10 @@ JOIN order_statuses os
 ORDER BY o.order_id
 ```
 
+[Back to top](#sql)
+
+---
+
 ### Self OUTTER JOIN
 
 - 和 inner join 没有区别
@@ -610,6 +755,10 @@ FROM employees e
 LEFT JOIN employees m
 	ON e.reports_to = m.employee_id
 ```
+
+[Back to top](#sql)
+
+---
 
 ### USING Clause
 
@@ -650,6 +799,10 @@ JOIN payment_methods pm
 	ON p.payment_method = pm.payment_method_id
 ```
 
+[Back to top](#sql)
+
+---
+
 ### NATURAL JOIN
 
 - NEVER USE THIS
@@ -662,6 +815,10 @@ SELECT
 FROM orders o
 NATURAL JOIN customers c
 ```
+
+[Back to top](#sql)
+
+---
 
 ### CROSS JOIN
 
@@ -679,6 +836,10 @@ FROM customers c
 CROSS JOIN products p
 ORDER BY c.first_name
 ```
+
+[Back to top](#sql)
+
+---
 
 ### UNION
 
@@ -740,6 +901,10 @@ FROM customers
 WHERE points > 3000
 ```
 
+[Back to top](#sql)
+
+---
+
 ### Column attributes
 
 ![column_attributes](./images/column_attributes.png)
@@ -752,6 +917,10 @@ WHERE points > 3000
 - NN - not null
 - AI - auto increment 一般用在主键
 - Default/Expression 默认值
+
+[Back to top](#sql)
+
+---
 
 ### INSERT INTO a single row
 
@@ -779,6 +948,10 @@ VALUES (
 )
 ```
 
+[Back to top](#sql)
+
+---
+
 ### INSERT INTO multiple rows
 
 - 只要在 VALUES 后面加逗号 括号 里面添加新的值 就可以同时 INSERT INTO 多个行了
@@ -791,6 +964,10 @@ VALUES ('Shipper1'),
 	   	 ('Shipper2'),
        ('Shipper3')
 ```
+
+[Back to top](#sql)
+
+---
 
 ### INSERT Hieraichical Rows (INSERT INTO 多个 tables)
 
@@ -807,6 +984,10 @@ VALUES
 		(LAST_INSERT_ID(), 1, 1, 2.95),
     (LAST_INSERT_ID(), 2, 1, 3.95)
 ```
+
+[Back to top](#sql)
+
+---
 
 ### Copy data from one table to another
 
@@ -841,6 +1022,10 @@ JOIN clients c
 WHERE payment_date IS NOT NULLinvoices_archived
 ```
 
+[Back to top](#sql)
+
+---
+
 ### Update a single row
 
 - 可以 SET DAFAULT 值 或者 NULL
@@ -864,6 +1049,10 @@ WHERE invoice_id = 3
 
 ```
 
+[Back to top](#sql)
+
+---
+
 ### Update Multiple rows
 
 - 修改 WHERE 里面的条件
@@ -876,6 +1065,10 @@ SET
 	payment_date = due_date
 WHERE client_id IN (3, 4)
 ```
+
+[Back to top](#sql)
+
+---
 
 ### Using Subqueries in Updates
 
@@ -892,6 +1085,10 @@ WHERE client_id IN
 			WHERE state IN ('CA', 'NY'))
 ```
 
+[Back to top](#sql)
+
+---
+
 ### Delete Row
 
 - 使用 DELETE FROM
@@ -906,44 +1103,6 @@ WHERE client_id = (
 )
 ```
 
-- [SQL](#sql)
-  * [DBMS](#dbms)
-  * [Primary Key & Foreign Key & Composite Key](#primary-key---foreign-key---composite-key)
-  * [CREATE DATABASE](#create-database)
-  * [CREATE TABLE](#create-table)
-  * [INSERT INTO dbName(colName1, colName2) VALUES(value1, value2, 'value3')](#insert-into-dbname-colname1--colname2--values-value1--value2---value3--)
-  * [Add Constrains when CREATE TABLE](#add-constrains-when-create-table)
-  * [UPDATE & DELETE FROM](#update---delete-from)
-  * [CREATE a Complex Database](#create-a-complex-database)
-  * [SELECT](#select)
-  * [WHERE](#where)
-  * [Combined search AND OR NOT](#combined-search-and-or-not)
-  * [IN](#in)
-  * [BETWEEN](#between)
-  * [LIKE](#like)
-  * [REGEXP](#regexp)
-  * [IS NULL](#is-null)
-  * [ORDER BY Clause](#order-by-clause)
-  * [LIMIT Clause](#limit-clause)
-  * [JOIN (INNER JOIN) INNER 可以省略](#join--inner-join--inner-----)
-  * [Combine columns from tables across Databases](#combine-columns-from-tables-across-databases)
-  * [SELF JOIN](#self-join)
-  * [Join Multiple Tables](#join-multiple-tables)
-  * [Composite primary key JOIN table](#composite-primary-key-join-table)
-  * [Implicit join syntax](#implicit-join-syntax)
-  * [LEFT JOIN RIGHT JOIN (OUTER JOIN) OUTER 可以省略](#left-join-right-join--outer-join--outer-----)
-  * [Outer join in multiple tables](#outer-join-in-multiple-tables)
-  * [Self OUTTER JOIN](#self-outter-join)
-  * [USING Clause](#using-clause)
-  * [NATURAL JOIN](#natural-join)
-  * [CROSS JOIN](#cross-join)
-  * [UNION](#union)
-  * [Column attributes](#column-attributes)
-  * [INSERT INTO a single row](#insert-into-a-single-row)
-  * [INSERT INTO multiple rows](#insert-into-multiple-rows)
-  * [INSERT Hieraichical Rows (INSERT INTO 多个 tables)](#insert-hieraichical-rows--insert-into----tables-)
-  * [Copy data from one table to another](#copy-data-from-one-table-to-another)
-  * [Update a single row](#update-a-single-row)
-  * [Update Multiple rows](#update-multiple-rows)
-  * [Using Subqueries in Updates](#using-subqueries-in-updates)
-  * [Delete Row](#delete-row)
+[Back to top](#sql)
+
+---
