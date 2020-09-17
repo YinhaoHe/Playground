@@ -2,7 +2,7 @@
 
 * [4 Pillars in OOP](#4-pillars-in-oop)
 * [Object](#object)
-* [Add/remove properties in obj](#Add/remove-properties-in-obj)
+* [Add/remove properties in obj](#Add-remove-properties-in-obj)
 * [Inheritance: Classical and Prototypical](#inheritance-classical-and-prototypical)
 * [Descriptor](#descriptor)
 * [Constructor 也有 prototype](#constructor-也有-prototype)
