@@ -3,12 +3,12 @@
 **NOT CASE SENSITIVE**
 
 * [DBMS](#dbms)
-* [Primary Key & Foreign Key & Composite Key](#primary-key-&-foreign-key-&-composite-key)
+* [Primary Key & Foreign Key & Composite Key](#primary-key-foreign-key-composite-key)
 * [CREATE DATABASE](#create-database)
 * [CREATE TABLE](#create-table)
 * [INSERT INTO](#insert-into)
 * [Add Constrains when CREATE TABLE](#add-constrains-when-create-table)
-* [UPDATE & DELETE FROM](#update-&-delete-from)
+* [UPDATE & DELETE FROM](#update-delete-from)
 * [CREATE a Complex Database](#create-a-complex-database)
 * [SELECT](#select)
 * [WHERE](#where)
@@ -54,7 +54,7 @@
 
 ---
 
-### Primary Key & Foreign Key & Composite Key
+### Primary Key Foreign Key Composite Key
 
 - Primary key 是唯一的 用来对应一个表中唯一的元素 不可以为空
 - Foreign key 一个表里可以有多个 是用来和别的表建立关系的 一般情况的 foreign key 是别的表的 primary key
@@ -140,7 +140,7 @@ CREATE TABLE student (
 
 ---
 
-### UPDATE & DELETE FROM
+### UPDATE DELETE FROM
 
 ```sql
 -- Delete every record
