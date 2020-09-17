@@ -13,6 +13,8 @@
 * [let and var](#let-and-var)
 *  [This](#This)
 
+---
+
 ### Build Objs:
 
 Constructor:
@@ -41,11 +43,15 @@ function createCircle(radius) {
 
  [Back to top](#JS-Basics)
 
+---
+
 ### Hoisting:
 
 JS enginee will automatically move all declaration to the top of the file.
 
  [Back to top](#JS-Basics)
+
+---
 
 ### Call back function:
 
@@ -53,11 +59,15 @@ JS enginee will automatically move all declaration to the top of the file.
 
  [Back to top](#JS-Basics)
 
+---
+
 ### Template literal:
 
 `${name}` 用于模版化输入输出 动态定义变量名
 
  [Back to top](#JS-Basics)
+
+---
 
 ### Reduce():
 
@@ -65,17 +75,23 @@ reduce((a, b) => a + b) 用于表示将一个数组里的数字全部加起来�
 
  [Back to top](#JS-Basics)
 
+---
+
 ### Spread operator:
 
 ...name 用来 copy name
 
  [Back to top](#JS-Basics)
 
+---
+
 ### Rest operator:
 
 function sum(...args) {} 用于可变参数的函数定义 ...args 可以读入 rest 的所有参数，但只能是 function 中的最后一个参数 function sum(a, ...args, b) 就是错的
 
  [Back to top](#JS-Basics)
+
+---
 
 ### Function default parameter:
 
@@ -85,17 +101,23 @@ default parameter 应该是最后一个参数 或者该参数后面的参数全�
 
  [Back to top](#JS-Basics)
 
+---
+
 ### Getter and Setter:
 
 在一个 obj 内部定义一个 method 前面加上 get 关键字 就变成了一个 getter 外部访问这个函数时候不需要加括号 e.g. person.fullname not person.fullname()
 
  [Back to top](#JS-Basics)
 
+---
+
 ### Local and Global Scope:
 
 一个 codeBlock 中的变量只能被自己访问，尽量少的用全局变量
 
  [Back to top](#JS-Basics)
+
+---
 
 ### let and var:
 
@@ -107,6 +129,8 @@ var 定义的全局变量 会被加到 window object 里面去 有可能会被�
 同理 定义函数 也尽可能的不要将函数加到 window obj 中去 会造成不必要的麻烦 一定要使用 module 的概念去定义
 
  [Back to top](#JS-Basics)
+
+---
 
 ### this:
 
@@ -120,3 +144,6 @@ call back function 只是一个普通函数 call back 中直接用 this 会指�
 Always use arrow function: 可以帮我们解决修改 this 值时遇到的麻烦
 
  [Back to top](#JS-Basics)
+
+---
+
