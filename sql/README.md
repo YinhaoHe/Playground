@@ -6,7 +6,7 @@
 * [Primary Key & Foreign Key & Composite Key](#primary-key---foreign-key---composite-key)
 * [CREATE DATABASE](#create-database)
 * [CREATE TABLE](#create-table)
-* [INSERT INTO dbName(colName1, colName2) VALUES(value1, value2, 'value3')](#insert-into-dbname-colname1--colname2--values-value1--value2---value3--)
+* [INSERT INTO](#insert-into)
 * [Add Constrains when CREATE TABLE](#add-constrains-when-create-table)
 * [UPDATE & DELETE FROM](#update-&-delete-from)
 * [CREATE a Complex Database](#create-a-complex-database)
@@ -100,7 +100,9 @@ ALTER TABLE student DROP COLUMN gpa;
 
 ---
 
-### INSERT INTO dbName(colName1, colName2) VALUES(value1, value2, 'value3') 
+### INSERT INTO 
+
+- INSERT INTO dbName(colName1, colName2) VALUES(value1, value2, 'value3') 
 
 - 由于主键不能重复 所以不能重复输入相同的记录
 
