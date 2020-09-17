@@ -1,6 +1,6 @@
 ## ES6 OOP
 
-+ [4 Pillars in OOP](#4-pillars-in-oop)
+* [4 Pillars in OOP](#4-pillars-in-oop)
 * [Object](#object)
 * [Add remove properties 增加和删除一个 obj 中的属性](#add-remove-properties-增加和删除一个 obj 中的属性)
 * [Inheritance: Classical and Prototypical](#inheritance-classical-and-prototypical)
@@ -9,17 +9,17 @@
 * [Instance members and Prototype members](#instance-members-and-prototype-members)
 * [Enum instance members and prototype members](#enum-instance-members-and-prototype-members)
 * [Use Mixins to implement compositions](#use-mixins-to-implement-compositions)
-  * [ES6 class syntax sugar](#ES6-class-syntax-sugar)
+* [ES6 class syntax sugar](#ES6-class-syntax-sugar)
 + [class hoisting](#class-hoisting)
 * [Static methods](#static-methods)
 * [private members in ES6](#private-members-in-es6)
-  * [ES6 getter setter](#es6-getter-setter)
-  * [ES6 extend](#es6-extend)
-  * [ES6 method overwrite](#es6-method-overwrite)
-  * [CommonJS Modules **Used in Node.js**](#commonjs-modules-used-in-node.js)
-  * [ES6 Modules](#es6-modules)
-  * [Babel](#babel)
-- [real world work flow](#real-world-work-flow)
+* [ES6 getter setter](#es6-getter-setter)
+* [ES6 extend](#es6-extend)
+* [ES6 method overwrite](#es6-method-overwrite)
+* [CommonJS Modules **Used in Node.js**](#commonjs-modules-used-in-node.js)
+* [ES6 Modules](#es6-modules)
+* [Babel](#babel)
+* [real world work flow](#real-world-work-flow)
 
 ### 4 Pillars in OOP
 
