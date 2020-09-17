@@ -3,7 +3,7 @@
 **NOT CASE SENSITIVE**
 
 * [DBMS](#dbms)
-* [Primary Key & Foreign Key & Composite Key](#primary-key---foreign-key---composite-key)
+* [Primary Key & Foreign Key & Composite Key](#primary-key-&-foreign-key-&-composite-key)
 * [CREATE DATABASE](#create-database)
 * [CREATE TABLE](#create-table)
 * [INSERT INTO](#insert-into)
