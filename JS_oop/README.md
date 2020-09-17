@@ -21,6 +21,8 @@
 * [Babel](#babel)
 * [real world work flow](#real-world-work-flow)
 
+---
+
 ### 4 Pillars in OOP
 
 Encapsulation: group related variables, functions that opreate on them into objects. 把所有相关的变量和函数封装在一个对象中
@@ -39,6 +41,8 @@ Polymorphism: many forms, 同一个函数 在不同的 obj 中有不同的 funct
 
 [Back to top](#es6-OOP)
 
+---
+
 ### Object
 
 用 factory 创建 obj 或者用 obj literal 创建 obj js 都会调用默认 Object() constructor 函数
@@ -49,6 +53,8 @@ Polymorphism: many forms, 同一个函数 在不同的 obj 中有不同的 funct
 
 [Back to top](#es6-OOP)
 
+---
+
 ### Add remove properties in obj
 
 使用 dot notation 操作 或者使用 bracket notation 操作
@@ -56,6 +62,8 @@ circle.location = { x: 1 };
 delete circle['location'];
 
 [Back to top](#es6-OOP)
+
+---
 
 ### Inheritance: Classical and Prototypical
 
@@ -69,6 +77,8 @@ Prototypical: JS 中每一个 obj 都会 link 继承到一个 base obj 中 这�
 
 [Back to top](#es6-OOP)
 
+---
+
 ### Descriptor
 
 ```js
@@ -81,11 +91,15 @@ Object.defineProperty(person, "name", {
 
 [Back to top](#es6-OOP)
 
+---
+
 ### Constructor 也有 prototype
 
 构造函数在 js 中本身也是一个 obj 他也有自己对应的 prototype 和被构建的对象的 prototype 是同一个
 
 [Back to top](#es6-OOP)
+
+---
 
 ### Instance members and Prototype members
 
@@ -98,6 +112,8 @@ Object.defineProperty(person, "name", {
 
 [Back to top](#es6-OOP)
 
+---
+
 ### Enum instance members and prototype members
 
 Object.keys() 只能返回 instance member
@@ -105,6 +121,8 @@ Object.keys() 只能返回 instance member
 for (let key in c1) console.log(key) 可以返回所有 members 包括 instance 和 prototype
 
 [Back to top](#es6-OOP)
+
+---
 
 ### Use Mixins to implement compositions
 
@@ -122,6 +140,8 @@ const person = new Person();
 ```
 
 [Back to top](#es6-OOP)
+
+---
 
 ### ES6 class syntax sugar
 
@@ -144,11 +164,15 @@ class Circle {
 
 [Back to top](#es6-OOP)
 
+---
+
 ### class hoisting
 
 ES6 中的 class 不能被 hoisting 所以调用一个“类” 一定要在类的声明之后
 
 [Back to top](#es6-OOP)
+
+---
 
 ### Static methods
 
@@ -164,6 +188,8 @@ Math.abs();
 ```
 
 [Back to top](#es6-OOP)
+
+---
 
 ### private members in ES6
 
@@ -209,6 +235,8 @@ class Circle {
 
 [Back to top](#es6-OOP)
 
+---
+
 ### ES6 getter setter
 
 ```js
@@ -231,6 +259,8 @@ class Circle {
 ```
 
 [Back to top](#es6-OOP)
+
+---
 
 ### ES6 extend
 
@@ -260,12 +290,16 @@ class Circle extends Shape {
 
 [Back to top](#es6-OOP)
 
+---
+
 ### ES6 method overwrite
 
 - 直接在孩子类 derived class 中重写对应函数即可
 - 如果想使用父亲类中的函数 那么就要用 super.move() 使用 super 关键字点对应函数即可访问当前 obj 的 prototype 中的对应函数
 
 [Back to top](#es6-OOP)
+
+---
 
 ### CommonJS Modules used in Nodejs
 
@@ -274,12 +308,16 @@ class Circle extends Shape {
 
 [Back to top](#es6-OOP)
 
+---
+
 ### ES6 Modules used in ES6
 
 - export class Circle {}
 - import { Circle } from "./circle.js";
 
 [Back to top](#es6-OOP)
+
+---
 
 ### Babel
 
@@ -291,6 +329,8 @@ Babel 是用来把 ES6 code 翻译成 ES5 等等 兼容各个浏览器 并且去
 
 [Back to top](#es6-OOP)
 
+---
+
 ### real world work flow
 
 - Webpack
@@ -298,3 +338,5 @@ Babel 是用来把 ES6 code 翻译成 ES5 等等 兼容各个浏览器 并且去
     用来打包文件
 
 [Back to top](#es6-OOP)
+
+---
