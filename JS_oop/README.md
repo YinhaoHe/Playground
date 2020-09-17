@@ -2,7 +2,7 @@
 
 * [4 Pillars in OOP](#4-pillars-in-oop)
 * [Object](#object)
-* [Add/remove properties in obj](#Add-remove-properties-in-obj)
+* [Add remove properties in obj](#Add-remove-properties-in-obj)
 * [Inheritance: Classical and Prototypical](#inheritance-classical-and-prototypical)
 * [Descriptor](#descriptor)
 * [Constructor 也有 prototype](#constructor-也有-prototype)
@@ -16,7 +16,7 @@
 * [ES6 getter setter](#es6-getter-setter)
 * [ES6 extend](#es6-extend)
 * [ES6 method overwrite](#es6-method-overwrite)
-* [CommonJS Modules **Used in Node.js**](#commonjs-modules-used-in-node.js)
+* [CommonJS Modules Used in Node.js](#commonjs-modules-used-in-node.js)
 * [ES6 Modules](#es6-modules)
 * [Babel](#babel)
 * [real world work flow](#real-world-work-flow)
@@ -49,7 +49,7 @@ Polymorphism: many forms, 同一个函数 在不同的 obj 中有不同的 funct
 
 [Back to top](#es6-OOP)
 
-### Add/remove properties in obj
+### Add remove properties in obj
 
 使用 dot notation 操作 或者使用 bracket notation 操作
 circle.location = { x: 1 };
