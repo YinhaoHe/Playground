@@ -43,6 +43,8 @@
 * [Using Subqueries in Updates](#using-subqueries-in-updates)
 * [Delete Row](#delete-row)
 
+---
+
 ### DBMS
 
 - relational db
