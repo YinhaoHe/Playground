@@ -16,7 +16,7 @@
 * [ES6 getter setter](#es6-getter-setter)
 * [ES6 extend](#es6-extend)
 * [ES6 method overwrite](#es6-method-overwrite)
-* [CommonJS Modules used in Node.js](#commonjs-modules-used-in-node.js)
+* [CommonJS Modules used in Node.js](#commonjs-modules-used-in-nodejs)
 * [ES6 Modules used in ES6](#es6-modules-used-in-es6)
 * [Babel](#babel)
 * [real world work flow](#real-world-work-flow)
@@ -267,7 +267,7 @@ class Circle extends Shape {
 
 [Back to top](#es6-OOP)
 
-### CommonJS Modules used in Node.js
+### CommonJS Modules used in Nodejs
 
 - module.exports.Circle = Circle;
 - const Circle = require("./circle");
