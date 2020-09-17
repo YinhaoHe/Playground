@@ -2,14 +2,14 @@
 
 + [4 Pillars in OOP](#4-pillars-in-oop)
 * [Object](#object)
-* [Add/remove properties 增加和删除一个 obj 中的属性](#add/remove-properties-增加和删除一个 obj 中的属性)
+* [Add remove properties 增加和删除一个 obj 中的属性](#add-remove-properties-增加和删除一个 obj 中的属性)
 * [Inheritance: Classical and Prototypical](#inheritance-classical-and-prototypical)
 * [Descriptor](#descriptor)
 * [Constructor 也有 prototype](#constructor-也有-prototype)
 * [Instance members and Prototype members](#instance-members-and-prototype-members)
 * [Enum instance members and prototype members](#enum-instance-members-and-prototype-members)
 * [Use Mixins to implement compositions](#use-mixins-to-implement-compositions)
-  * [ES6 中 class 的概念](#es6-中-class-的概念)
+  * [ES6 class syntax sugar](#ES6-class-syntax-sugar)
 + [class hoisting](#class-hoisting)
 * [Static methods](#static-methods)
 * [private members in ES6](#private-members-in-es6)
@@ -49,7 +49,7 @@ Polymorphism: many forms, 同一个函数 在不同的 obj 中有不同的 funct
 
 [Back to top](#es6-OOP)
 
-### Add/remove properties 增加和删除一个 obj 中的属性
+### Add remove properties 增加和删除一个 obj 中的属性
 
 使用 dot notation 操作 或者使用 bracket notation 操作
 circle.location = { x: 1 };
@@ -123,7 +123,7 @@ const person = new Person();
 
 [Back to top](#es6-OOP)
 
-### ES6 中 class 的概念
+### ES6 class syntax sugar
 
 ```js
 class Circle {
