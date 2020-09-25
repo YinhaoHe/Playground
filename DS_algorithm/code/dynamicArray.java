@@ -1,5 +1,6 @@
+package code;
 
-public class DynamicArray<String> {
+public class DynamicArray<T> {
     private Object[] data;
 
     // counter the number of elements in our array

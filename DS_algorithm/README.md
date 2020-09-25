@@ -79,8 +79,9 @@ Get/Set/Random access in O(1) constant time
 [code](./code/dynamicArray.java)
 
  ```java
+package code;
 
-public class DynamicArray<String> {
+public class DynamicArray<T> {
     private Object[] data;
 
     // counter the number of elements in our array
@@ -232,3 +233,29 @@ public void set(int index, String value) {
   - Commonly used in Stacks and Queues
 - Array
   - [See the previous section](#Array)
+
+---
+
+### Add Front
+
+- 首先创建一个 new node
+- 把 new node 的 pointer 指向 current head node
+- 把 current head node 的 pointer 指向 new node
+
+---
+
+### getFirst
+
+- ```return head.data```
+
+### getLast
+
+- 判断是否```head == null```
+- find LinkedList tail
+- 返回尾部的data
+
+### addBack
+
+- 创建一个新Node
+- 找到尾部
+- 链表尾的next 指向newNode
