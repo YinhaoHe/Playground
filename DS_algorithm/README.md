@@ -248,14 +248,558 @@ public void set(int index, String value) {
 
 - ```return head.data```
 
+---
+
 ### getLast
 
 - 判断是否```head == null```
 - find LinkedList tail
 - 返回尾部的data
 
+---
+
 ### addBack
 
 - 创建一个新Node
+- 判断 head 是不是空 如果是 直接添加在头部
 - 找到尾部
 - 链表尾的next 指向newNode
+
+---
+
+### size
+
+- Solution one:
+  - 在 LinkedList class 中, 预设一个```private int size```
+  - 在 add 方法中添加一个 size ++
+- Brutal force
+  - check ```if head == null```
+  - set counter to 1
+  - find tail in while loop, each loop counter ++
+
+---
+
+### clear
+
+- 由于 LinkedList 是 Node 相连接一起的 
+- 直接把 ``` head = null ``` Done!
+
+---
+
+### Delete value
+
+- 判断 head 如果空 直接return
+- 如果头就是要删除的 直接``` head = head.next ```
+- 如果在 middle 
+  - 从头找到尾``` current.next != null; current = current.next; ```
+  - 当 ```current.next.data == data; ``` 就 ``` current.next = current.next.next; ```
+
+---
+
+### print
+
+- while loop 从头到尾 
+- 每一步 print
+
+---
+
+### Double Linked List
+
+[code](https://blog.csdn.net/javazejian/article/details/53047590)
+
+- 每个节点 有存储他的 上一个 和 下一个 
+- 机制和单向链表相同 
+
+---
+
+### Build my LinkedList
+
+```java
+package code;
+
+public class LinkedList {
+
+    public class Node {
+        int data;
+        Node next;
+
+        public Node(int data) {
+            this.data = data;
+        }
+    }
+
+    private Node head;
+
+    // O(1)
+    public void addFront(int data) {
+
+        // Create new Node
+        Node newNode = new Node(data);
+
+        // if head ...
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+
+        // Set its next to the current head
+        newNode.next = head;
+
+        // Set current head be the new head
+        head = newNode;
+    }
+
+    // O(1)
+    public int gerFirst() {
+        return head.data;
+    }
+
+    // O(n)
+    public int getLast() {
+        if (head == null) {
+            throw new IllegalStateException("Empty List!");
+        }
+        Node current = head;
+
+        // Find tail
+        while (current.next != null) {
+            current = current.next;
+        }
+
+        // When tail
+        return current.data;
+    }
+
+    // O(n)
+    public void addBack(int data) {
+        Node newNode = new Node(data);
+
+        // if no head ... set tail
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+
+        // Find tail
+        Node current = head;
+
+        while (current.next != null) {
+            current = current.next;
+        }
+
+        // set tail' next to newNode
+        current.next = newNode;
+    }
+
+    // O(n)
+    public int size() {
+        if (head == null) {
+            return 0;
+        }
+
+        int count = 1;
+        Node current = head;
+
+        while (current.next != null) {
+            current = current.next;
+            count++;
+        }
+
+        return count;
+    }
+
+    // O(1)
+    public void clear() {
+        head = null;
+    }
+
+    // O(n)
+    public void deleteValue(int data) {
+
+        // if head ...
+        if (head == null)
+            return;
+
+        if (head.data == data) {
+            head = head.next;
+        }
+
+        // else we walk through
+        Node current = head;
+
+        while (current.next != null) {
+            if (current.next.data == data) {
+                current.next = current.next.next;
+                return;
+            }
+            current = current.next;
+        }
+    }
+
+    public void print() {
+        Node current = head;
+        while (current.next != null) {
+            System.out.println(current.data);
+            current = current.next;
+        }
+    }
+
+}
+```
+
+---
+
+### Interview LinkedList
+
+- Add Front - O(1)
+- Add Back or middle - O(n)
+- Delete - O(n)
+- No random access
+- No fixed capacity
+- Always the right size
+
+---
+
+### Array vs ArrayList vs Linked List
+
+#### Differences
+
+- Array - basic data structure
+  - ```int[] numbers = new int[5]; ```
+  - plain old data structure
+  - fixed size/ can't grow
+  - fast random access O(1)
+- ArrayList - DynamicArray, Collection API 
+  - ``` ArrayList<Integer> mums = new ArrayList<Integer>();```
+  - Collection API built on top of Array
+  - new APIs: insert, remove. isEmpty
+  - Handles resizing
+  - aka DynamicArray
+- LinkedList - data structure
+  - plain old data structure
+  - no random access
+  - Fast add front - O(1)
+  - 需要自己实现很多添加删除操作
+
+---
+
+#### When to use
+
+Any data structure can be built with Array and LinkedList
+
+- Arrays - lower level Data Structure
+- ArrayList - high level APIs
+- LinkedList - lower level Data Structure 多用于实现 栈和 队列
+- Stacks/Queues - high level APIs
+
+---
+
+## Big O Notation
+
+[Common runtimes](./files/Common-Runtimes.pdf)
+
+![commonRuntime1](./images/commonRuntime1.png)
+
+![commonRuntime2](./images/commonRuntime2.png)
+
+![commonRuntime2](./images/commonRuntime3.png)
+
+---
+
+### Rule of thumb
+
+- Drop the non-donminant terms - O(n^2 + n) -> O(n^2)
+- Drop the constants - O(3n) -> O(n)
+- Add runtimes - 假如有两个for loop (两个不同数组 n 和 m) -O (n + m)
+- Multiply runtimes - 假如两个for loop nested (两个不同数组  n 和 m) - O (n * m)
+
+---
+
+### Practices
+
+```java
+package algorithms;
+
+public class BigO {
+
+		// O(n)
+    public void foo(int[] array) {
+
+        for (int i = 0; i < array.length; i++) {
+            // ...
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            // ...
+        }
+
+    }
+		
+  // O(n * m)
+    public void bar(int[] array1, int[] array2) {
+
+        for (int i = 0; i < array1.length; i++) {
+            // ...
+            for (int j = 0; j < array2.length; j++) {
+                // ...
+            }
+        }
+
+    }
+
+		// O(n^2)
+    public void baz(int[] array) {
+
+        for (int i = 0; i < array.length; i++) {
+            // ...
+            for (int j = 0; j < array.length; j++) {
+                // ...
+                if (array[i] < array[j]) {
+                    // Launch!
+                }
+            }
+        }
+
+    }
+	
+  	// O(n^2)
+    public void beep(int[] array) {
+
+        for (int i = 0; i < array.length; i++) {
+            // ...
+            for (int j = 0; j < array.length; j++) {
+                // ...
+                for (int k = 0; k < 9999999; k++) {
+                    // Jump!
+                  	// O(1)
+                }
+            }
+        }
+
+    }
+
+}
+```
+
+---
+
+### Two examples
+
+- O(n + m) where m < n/2 => O(n)
+- O(n + m) Not equal to O(n) 在不知道更多的关于m的情况下 不能再简化了
+
+---
+
+### Interview Big O Notation
+
+- Determine the runtime of an algorithm
+- Looping through two **different** collections **separate** loops -> O (n + m)
+- Looping through two **different** collections nested -> O (n * m)
+- Looping through 1/2 a collection -> O (n)
+
+---
+
+## Stacks and Queues
+
+- Stacks
+  - LIFO - last in first out
+  - Peek, isEmpty 
+  - push, pop - O(1)
+- Queues
+  - FIFO - first in first out
+  - peek, isEmpty 
+  - add, remove - O(1)
+
+---
+
+### Push to Stack
+
+- aka Add Front
+- 使用链表
+- O (1)
+
+---
+
+### Pop from Stack
+
+- 链表头读取 并删除节点
+- O (1)
+
+---
+
+### Add to Queue
+
+- 使用 LinkedList
+- 首先创建一个新的node
+- 将tail.next 指向新的node
+- 最后把newNode设置为tail
+- O (1)
+
+---
+
+### Remove from Queue
+
+- 跟 pop from stack 非常相似
+- O (1)
+
+---
+
+### Runtime
+
+- insert/delete from head or tail -> O(1)
+- drop anything in the middle of Stack/Queue -> O(n)
+- Access/search into the Stack/Queue -> O(n)
+
+---
+
+### Build my Stack
+
+```java
+package code;
+
+import java.util.EmptyStackException;
+
+public class Stack {
+
+    // 使用链表作为基础数据结构实现
+
+    private class Node {
+        private int data;
+        private Node next;
+
+        private Node(int data) {
+            this.data = data;
+        }
+    }
+
+    private Node head;
+    private int size;
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    public int peek() {
+        return head.data;
+    }
+
+    public void push(int data) {
+
+        // check head
+        if (head == null) {
+            head.data = data;
+        }
+
+        // if head not null
+        // create new node
+        Node newNode = new Node(data);
+
+        // new node next 指向 current head
+        newNode.next = head;
+
+        // 把new node 设为头
+        head = newNode;
+
+        // size 加一
+        size++;
+    }
+
+    public int pop() {
+
+        // check head
+        if (head == null) {
+            // throw new IllegalStateException("Empty stack!");
+            throw new EmptyStackException();
+        }
+
+        // store data
+        int data = head.data;
+
+        // point head to next
+        head = head.next;
+
+        // size minus one
+        size--;
+
+        return data;
+    }
+
+    public int size() {
+        return size;
+    }
+}
+
+```
+
+---
+
+### Build my Queue
+
+```java
+package code;
+
+public class Queue {
+    private class Node {
+        private int data;
+        private Node next;
+
+        private Node(int date) {
+            this.data = data;
+        }
+    }
+
+    private Node head; // remove things
+    private Node tail; // add things
+
+    public boolean isEmpty() {
+        return head == null;
+    }
+
+    public int peek() {
+        return head.data;
+    }
+
+    public void add(int data) {
+
+        // create a new node
+        // set tail.next = newNode
+        // set new node to tail
+
+        Node newNode = new Node(data);
+        if (tail != null) {
+            tail.next = newNode;
+        }
+        tail = newNode;
+
+        // the case if you add the first element in the queue
+        // 需要明确的记住这里头就是尾巴 因为只有一个元素在队列中
+        if (head == null) {
+            head = tail;
+        }
+    }
+
+    public int remove() {
+
+        // save the data
+        // point head to the next
+        // return data
+
+        int data = head.data;
+        head = head.next;
+
+        // Queue being empty
+        if (head == null) {
+            tail = null;
+        }
+
+        return data;
+    }
+}
+
+```
+
+---
+
+### Interview Stack and Queue
+
+![StackAndQueue](./images/StackAndQueue.png)

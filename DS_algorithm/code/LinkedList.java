@@ -13,6 +13,7 @@ public class LinkedList {
 
     private Node head;
 
+    // O(1)
     public void addFront(int data) {
 
         // Create new Node
@@ -31,10 +32,12 @@ public class LinkedList {
         head = newNode;
     }
 
+    // O(1)
     public int gerFirst() {
         return head.data;
     }
 
+    // O(n)
     public int getLast() {
         if (head == null) {
             throw new IllegalStateException("Empty List!");
@@ -50,6 +53,7 @@ public class LinkedList {
         return current.data;
     }
 
+    // O(n)
     public void addBack(int data) {
         Node newNode = new Node(data);
 
@@ -70,6 +74,7 @@ public class LinkedList {
         current.next = newNode;
     }
 
+    // O(n)
     public int size() {
         if (head == null) {
             return 0;
@@ -86,10 +91,12 @@ public class LinkedList {
         return count;
     }
 
+    // O(1)
     public void clear() {
         head = null;
     }
 
+    // O(n)
     public void deleteValue(int data) {
 
         // if head ...
@@ -106,11 +113,18 @@ public class LinkedList {
         while (current.next != null) {
             if (current.next.data == data) {
                 current.next = current.next.next;
+                return;
             }
-            return;
+            current = current.next;
         }
-        current = current.next;
+    }
 
+    public void print() {
+        Node current = head;
+        while (current.next != null) {
+            System.out.println(current.data);
+            current = current.next;
+        }
     }
 
 }

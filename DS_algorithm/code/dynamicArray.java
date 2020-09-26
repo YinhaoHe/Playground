@@ -58,6 +58,7 @@ public class DynamicArray<T> {
         size--;
     }
 
+    // O(1)
     public boolean isEmpty() {
         return size == 0;
     }
