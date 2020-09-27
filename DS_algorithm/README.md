@@ -1301,3 +1301,216 @@ public class BinarySearchTree {
 
 ---
 
+## Binary Heaps
+
+### properities
+
+- 可以是最大堆/最小堆 （以最大堆为例）
+- 堆顶端一定是最大的element
+- 堆里可以有重复元素 duplicate ok
+- Heap priority 堆顶 一定比下面大 = parent node 一定大于 两个孩子
+- 但是两个孩子 不一定要左边比右边小 随意顺序
+
+[Back to top](#Data-Structure)
+
+---
+
+### Binary Heap implementation
+
+![binaryHeap](./images/binaryHeap.png)
+
+[Back to top](#Data-Structure)
+
+---
+
+### Insert
+
+- Add to the bottom
+- Heapify up
+  - 如果这个element比他的parent大，就和parent交换位置
+  - 如果这个element比parent小，stay where you are 
+
+[Back to top](#Data-Structure)
+
+---
+
+### Extract the max
+
+- 取出最大值 
+- Swap top and bottom
+- Heapify down
+  - 最上面现在是最小值
+  - 用parent和两个孩子比较
+  - 把这个node和两个孩子中**较大**的一个交换位置
+- Binary heap 中 不同 branch 里面的节点 不一定要满足 更高level的一定比低level的节点优先级高 - 在跨branches时候没有这一个规定
+
+[Back to top](#Data-Structure)
+
+---
+
+###  Space efficiency
+
+- Fast - ExtractMax - O(1)
+- Compact, in-place swap 不占用额外很多空间
+- 代码量短
+
+[Back to top](#Data-Structure)
+
+---
+
+### Build my Binary Heap
+
+[code](./algorithms101/src/main/java/algorithms/MaxIntHeap.java)
+
+```java
+package code;
+
+import java.util.Arrays;
+
+public class MaxBinaryHeap {
+    private int capacity = 10; // 数组大小
+    private int size = 0; // 元素个数
+
+    public int[] items = new int[capacity];
+
+    private int leftChildIndex(int parentIndex) {
+        return 2 * parentIndex + 1;
+    }
+
+    private int rightChildIndex(int parentIndex) {
+        return 2 * parentIndex + 2;
+    }
+
+    private int parentIndex(int childIndex) {
+        return (childIndex - 1) / 2;
+    }
+
+    private boolean hasLeftChild(int index) {
+        return leftChildIndex(index) < size;
+    }
+
+    private boolean hasRightChild(int index) {
+        return rightChildIndex(index) < size;
+    }
+
+    private boolean hasParent(int index) {
+        return parentIndex(index) >= 0;
+    }
+
+    private int leftChild(int index) {
+        return items[leftChildIndex(index)];
+    }
+
+    private int rightChild(int index) {
+        return items[rightChildIndex(index)];
+    }
+
+    private int parent(int index) {
+        return items[parentIndex(index)];
+    }
+
+    public int extractMax() {
+        if (size == 0)
+            throw new IllegalStateException();
+        int item = items[0]; // grab the max
+        items[0] = items[size - 1]; // swap with the last
+        size--; // delete laset entry (max)
+        heapifyDown(); // reorder
+        return item; // return
+    }
+
+    public void ensureCapacity() {
+        if (size == capacity) {
+            items = Arrays.copyOf(items, capacity * 2);
+            capacity *= 2;
+        }
+    }
+
+    public void insert(int item) {
+        ensureCapacity();
+        items[size] = item; // put in the last
+        size++;
+        heapifyUp();
+    }
+
+    public void heapifyUp() {
+        int index = size - 1; // start at last element
+        // while my parents are less than me...
+
+        while (hasParent(index) && parent(index) < items[index]) {
+            swap(parentIndex(index), index);
+            index = parentIndex(index); // walk upwards to next node
+        }
+    }
+
+    public void heapifyDown() {
+        int index = 0; // start from the top
+
+        while (hasLeftChild(index)) {
+
+            // take the larger of the two indexes
+            int largerChildIndex = leftChildIndex(index);
+            if (hasRightChild(index) && rightChild(index) > leftChild(index)) {
+                largerChildIndex = rightChildIndex(index);
+            }
+
+            // now compare
+
+            // if I am larger than the items of my two children...
+            // then everything is good. I am sorted.
+            if (items[index] > items[largerChildIndex]) {
+                break;
+            } else {
+                // we are still not in order - swap
+                swap(index, largerChildIndex);
+            }
+
+            // then move down to smaller child
+            index = largerChildIndex;
+        }
+    }
+
+    public void print() {
+        for (int i = 0; i < size; i++) {
+            System.out.println(i + "[" + items[i] + "]");
+        }
+    }
+
+    private void swap(int indexOne, int indexTwo) {
+        int temp = items[indexOne];
+        items[indexOne] = items[indexTwo];
+        items[indexTwo] = temp;
+    }
+}
+
+```
+
+[Back to top](#Data-Structure)
+
+---
+
+### Runtime
+
+- ExtractMax - O(1)
+  - Peek() - O(1)
+  - Heapify - O(logN)
+- Heapify - O(logN) - single run
+- Heap Sort - O(NlogN)
+  - sorting the tree n times
+
+[Back to top](#Data-Structure)
+
+---
+
+### Interview Binary Heap
+
+- Peek - O(1) - Extract max or min in constant time
+- Maintain Heap order
+  - Insert - heapify up
+  - Extract - heapify down
+- Used for Priority Queue, scheduling, routing packets, and etc...
+
+[Back to top](#Data-Structure)
+
+---
+
