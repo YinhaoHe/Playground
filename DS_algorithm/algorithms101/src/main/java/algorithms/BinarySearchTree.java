@@ -59,7 +59,8 @@ public class BinarySearchTree {
 
         // If null - set it here. We are done.
         if (node == null) {
-            node = new Node(key, value);;
+            node = new Node(key, value);
+            ;
             return node;
         }
 
@@ -68,7 +69,8 @@ public class BinarySearchTree {
         // that is null and set it there
         if (key < node.key) {
             node.left = insertItem(node.left, key, value);
-        } if (key > node.key) {
+        }
+        if (key > node.key) {
             node.right = insertItem(node.right, key, value);
         }
 
@@ -87,7 +89,8 @@ public class BinarySearchTree {
 
     // Case 1: No child - simply remove from tree by nulling it.
     //
-    // Case 2: One child - copy the child to the node to be deleted and delete the child
+    // Case 2: One child - copy the child to the node to be deleted and delete the
+    // child
 
     // Case 3: Two children - re-gig the tree to turn into a Case 1 or a Case 2
 
@@ -214,6 +217,7 @@ public class BinarySearchTree {
         System.out.println("   /  \\");
         System.out.println("  " + rootLeftKey + "    " + rootRightKey);
         System.out.println(" / \\  / \\");
-        System.out.println(rootLeftLeftKey + "  " + rootLeftRightKey + " " + rootRightLeftKey + "   " + rootRightRightKey);
+        System.out.println(
+                rootLeftLeftKey + "  " + rootLeftRightKey + " " + rootRightLeftKey + "   " + rootRightRightKey);
     }
 }

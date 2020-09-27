@@ -22,6 +22,8 @@ ArrayList<Integer> bar = new ArrayList<Integer>();
 | Linked List     | used in | Stacks & Queues |
 | Binary Tree     | used in | Binary Heap     |
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Three things about Arrays
@@ -42,11 +44,15 @@ Array cannot grow compared to LinkedList
 
 Array can be accessed throught index in O(1)
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Array Killer features 
 
 Get/Set/Random access in O(1) constant time
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -56,12 +62,16 @@ Get/Set/Random access in O(1) constant time
 - insert the value into that space
 - ```insert(1, "b")```O(n) Linear time
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Delete in Array
 
 - copy down to overwrite 
 - O(n) Linear time
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -71,6 +81,8 @@ Get/Set/Random access in O(1) constant time
 - 只能通过创建一个新的Array 来增加Array的space
 - 创建新的Array会先double之前的Array的capacity 然后 copy旧的到新的里面
 - 最后添加进去新的元素 （会浪费一些空间，因为一定会double之前的数组的空间）
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -188,6 +200,8 @@ public class DynamicArray<T> {
 }
  ```
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Error handling
@@ -204,6 +218,8 @@ public void set(int index, String value) {
 }
 ```
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Interview Array
@@ -214,6 +230,8 @@ public void set(int index, String value) {
 - Random access - 使用index访问任何元素都巨快
 - Fixed capacity - 数组大小一旦声明就是定好的不能改变
 - Double when resize - 当要向动态数组中插入元素时 一旦数组不够大 就会double space 
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -234,6 +252,8 @@ public void set(int index, String value) {
 - Array
   - [See the previous section](#Array)
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Add Front
@@ -242,11 +262,15 @@ public void set(int index, String value) {
 - 把 new node 的 pointer 指向 current head node
 - 把 current head node 的 pointer 指向 new node
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### getFirst
 
 - ```return head.data```
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -256,6 +280,8 @@ public void set(int index, String value) {
 - find LinkedList tail
 - 返回尾部的data
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### addBack
@@ -264,6 +290,8 @@ public void set(int index, String value) {
 - 判断 head 是不是空 如果是 直接添加在头部
 - 找到尾部
 - 链表尾的next 指向newNode
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -277,12 +305,16 @@ public void set(int index, String value) {
   - set counter to 1
   - find tail in while loop, each loop counter ++
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### clear
 
 - 由于 LinkedList 是 Node 相连接一起的 
 - 直接把 ``` head = null ``` Done!
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -294,12 +326,16 @@ public void set(int index, String value) {
   - 从头找到尾``` current.next != null; current = current.next; ```
   - 当 ```current.next.data == data; ``` 就 ``` current.next = current.next.next; ```
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### print
 
 - while loop 从头到尾 
 - 每一步 print
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -309,6 +345,8 @@ public void set(int index, String value) {
 
 - 每个节点 有存储他的 上一个 和 下一个 
 - 机制和单向链表相同 
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -449,6 +487,8 @@ public class LinkedList {
 }
 ```
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Interview LinkedList
@@ -459,6 +499,8 @@ public class LinkedList {
 - No random access
 - No fixed capacity
 - Always the right size
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -483,6 +525,8 @@ public class LinkedList {
   - Fast add front - O(1)
   - 需要自己实现很多添加删除操作
 
+[Back to top](#Data-Structure)
+
 ---
 
 #### When to use
@@ -493,6 +537,8 @@ Any data structure can be built with Array and LinkedList
 - ArrayList - high level APIs
 - LinkedList - lower level Data Structure 多用于实现 栈和 队列
 - Stacks/Queues - high level APIs
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -506,6 +552,8 @@ Any data structure can be built with Array and LinkedList
 
 ![commonRuntime2](./images/commonRuntime3.png)
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Rule of thumb
@@ -514,6 +562,8 @@ Any data structure can be built with Array and LinkedList
 - Drop the constants - O(3n) -> O(n)
 - Add runtimes - 假如有两个for loop (两个不同数组 n 和 m) -O (n + m)
 - Multiply runtimes - 假如两个for loop nested (两个不同数组  n 和 m) - O (n * m)
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -583,12 +633,16 @@ public class BigO {
 }
 ```
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Two examples
 
 - O(n + m) where m < n/2 => O(n)
 - O(n + m) Not equal to O(n) 在不知道更多的关于m的情况下 不能再简化了
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -598,6 +652,8 @@ public class BigO {
 - Looping through two **different** collections **separate** loops -> O (n + m)
 - Looping through two **different** collections nested -> O (n * m)
 - Looping through 1/2 a collection -> O (n)
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -612,6 +668,8 @@ public class BigO {
   - peek, isEmpty 
   - add, remove - O(1)
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Push to Stack
@@ -620,12 +678,16 @@ public class BigO {
 - 使用链表
 - O (1)
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Pop from Stack
 
 - 链表头读取 并删除节点
 - O (1)
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -637,12 +699,16 @@ public class BigO {
 - 最后把newNode设置为tail
 - O (1)
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Remove from Queue
 
 - 跟 pop from stack 非常相似
 - O (1)
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -651,6 +717,8 @@ public class BigO {
 - insert/delete from head or tail -> O(1)
 - drop anything in the middle of Stack/Queue -> O(n)
 - Access/search into the Stack/Queue -> O(n)
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -735,6 +803,8 @@ public class Stack {
 
 ```
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Build my Queue
@@ -804,6 +874,8 @@ public class Queue {
 
 ```
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Interview Stack and Queue
@@ -811,6 +883,8 @@ public class Queue {
 ![StackAndQueue](./images/StackAndQueue.png)
 
 ---
+
+[Back to top](#Data-Structure)
 
 ## Hash Table
 
@@ -822,6 +896,8 @@ An Array consists LinkedLists
 - convert hash into index
 - handle collision
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Hash funtion
@@ -832,6 +908,8 @@ Calculated to numbers which can be used for lookup
 - Gave even distributed numbers
 - Minimizes collisions
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Convert hash into index
@@ -841,6 +919,8 @@ Calculated to numbers which can be used for lookup
 - ```int index = hashCode % INITIAL_SIZE;```
 - 通过求余数 来生成 index
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Handle collision
@@ -849,12 +929,16 @@ Calculated to numbers which can be used for lookup
 - 我们把这两个重复的 Objs 存入一个 LinkedList中 
 - Called **Chaining**
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Runtime
 
 - Search, insert, delete - O(1) - good hash table 
 - O(n) - bad hash table - which means you have a lot of collision - 可以导致变成O(n)
+
+[Back to top](#Data-Structure)
 
 ---
 
@@ -946,6 +1030,8 @@ public class HashTable {
 
 ```
 
+[Back to top](#Data-Structure)
+
 ---
 
 ### Interview HashTable
@@ -954,6 +1040,264 @@ public class HashTable {
 - Understand what hashing algorithm does
 - Collisions are handled via **chaining**
 - Index (not hash) used only for lookups
+
+[Back to top](#Data-Structure)
+
+---
+
+## Binary Tree
+
+- **full** binary tree - 每一个子节点都有两个孩子 or 零个孩子 - 不出现单一节点
+- **perfect** binary tree - 每一个节点都有左孩子 和 右孩子
+- **balanced** binary tree - 拥有尽可能最小height的树
+
+- Breadth first - 广度优先
+- Depth first - 深度优先
+
+[Back to top](#Data-Structure)
+
+---
+
+### Binary Search Tree (BST)
+
+- left child < parent < right child
+- O(logN)
+- Recursive
+- We always work with the key for search
+
+[Back to top](#Data-Structure)
+
+---
+
+### Find
+
+- 标准二叉搜索
+
+[Back to top](#Data-Structure)
+
+---
+
+### insert
+
+- 从root开始 如果空 就放这
+- 不空就二叉搜索 小左大右
+- 找到一个空的 放这里
+
+[Back to top](#Data-Structure)
+
+---
+
+### find min
+
+- 生成node类中添加一个函数
+- 递归左边 找到最左边最下面的node
+
+[Back to top](#Data-Structure)
+
+---
+
+### delete
+
+- no child
+  - 直接 set it to null
+- one child
+  - 找到要delete的node
+  - 找到他的child
+  - 用child替换这个node 
+- two children
+  - 找到要delete的node
+  - 找这个node整个右边最小的node / 或者找到左边最大的
+  - 把右边最小node 复制到要删除的node上
+  - 删除右边的重复的最小的node set to null
+  - **Why can't we just set minRight = null?**
+    - 删除最右边的最小 不能简单的直接set 为 null
+    - 有可能他还有子树 所以要递归调用删除 让这个子树解决自己的问题
+    - [link](http://www.mathcs.emory.edu/~cheung/Courses/171/Syllabus/9-BinTree/BST-delete2.html)
+
+[Back to top](#Data-Structure)
+
+---
+
+### Depth First Traversal
+
+- Inorder - left -> root -> right
+- Preorder - root -> left -> right
+- Postorder - left -> right -> root
+
+[Back to top](#Data-Structure)
+
+---
+
+### Build my Binary Search Tree
+
+[code](./algorithms101/src/main/java/algorithms/BinarySearchTree.java)
+
+```java
+package code;
+
+public class BinarySearchTree {
+
+    // Node
+    class Node {
+        int key;
+        String value;
+        Node right, left;
+
+        public Node(int key, String value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public Node min() {
+            if (left == null) {
+                return this;
+            } else {
+                return left.min();
+            }
+        }
+    }
+
+    Node root;
+
+    public BinarySearchTree() {
+        root = null;
+    }
+
+    // Find
+    public String find(int key) {
+
+        Node node = find(root, key);
+
+        return node == null ? null : node.value;
+    }
+
+    private Node find(Node node, int key) {
+        if (node == null || node.key == key) {
+            return node;
+        } else if (key < node.key) {
+            return find(node.left, key);
+        } else if (key > node.key) {
+            return find(node.right, key);
+        }
+        return null;
+    }
+
+    // Insert
+    public void insert(int key, String value) {
+        root = insertItem(root, key, value);
+    }
+
+    public Node insertItem(Node node, int key, String value) {
+
+        // if null - set it here
+        if (node == null) {
+            node = new Node(key, value);
+            return node;
+        }
+
+        // if not, find a null and set
+        if (key < node.key) {
+            node.left = insertItem(node.left, key, value);
+        } else if (key > node.key) {
+            node.right = insertItem(node.right, key, value);
+        }
+        return node;
+    }
+
+    public int findMinKey() {
+        return findMin(root).key;
+    }
+
+    public Node findMin(Node node) {
+        return node.min();
+    }
+
+    public void delete(int key) {
+        root = delete(root, key);
+    }
+
+    public Node delete(Node node, int key) {
+        if (node == null) {
+            return null;
+        } else if (key < node.key) {
+            node.left = delete(node.left, key);
+        } else if (key > node.key) {
+            node.right = delete(node.right, key);
+        } else {
+
+            // case 1 : no child
+            if (node.left == null && node.right == null) {
+                node = null;
+            }
+
+            // case 2 : one child 
+            else if (node.left == null) {
+                node = node.right;
+            } else if (node.right == null) {
+                node = node.left;
+            }
+
+            // case 3 : two child
+            else {
+                Node minRight = findMin(node.right);
+
+                node.key = minRight.key;
+                node.value = minRight.value;
+
+                node.right = delete(node.right, node.key);
+            }
+        }
+        return node;
+    }
+
+    public void inOrderTraversal(Node node) {
+        if (node != null) {
+            inOrderTraversal(node.left);
+            System.out.println(node.key);
+            inOrderTraversal(node.right);
+        }
+    }
+
+    public void preOrderTraversal(Node node) {
+        if (node != null) {
+            System.out.println(node.key);
+            preOrderTraversal(node.left);
+            preOrderTraversal(node.right);
+        }
+    }
+
+    public void postOrderTraversal(Node node) {
+        if (node != null) {
+            postOrderTraversal(node.left);
+            postOrderTraversal(node.right);
+            System.out.println(node.key);
+        }
+    }
+}
+
+```
+
+[Back to top](#Data-Structure)
+
+---
+
+### Runtime
+
+- O(logN) - find/insert/delete
+
+[Back to top](#Data-Structure)
+
+---
+
+### Interview Binary Search Tree
+
+- Ordered
+- Recurisive
+- Full/Perfect/Balanced
+- Depth(Inorder/PreOrder/PostOrder)/Breadth
+- O(logN)
+
+[Back to top](#Data-Structure)
 
 ---
 
