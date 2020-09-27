@@ -76,7 +76,7 @@ Get/Set/Random access in O(1) constant time
 
 ### Build my dynamicArray
 
-[code](./code/dynamicArray.java)
+[code](./algorithms101/src/main/java/datastructures/DynamicArray.java)
 
  ```java
 package code;
@@ -313,6 +313,8 @@ public void set(int index, String value) {
 ---
 
 ### Build my LinkedList
+
+[code](./algorithms101/src/main/java/datastructures/LinkedList.java)
 
 ```java
 package code;
@@ -654,6 +656,8 @@ public class BigO {
 
 ### Build my Stack
 
+[code](./algorithms101/src/main/java/datastructures/Stack.java)
+
 ```java
 package code;
 
@@ -735,6 +739,8 @@ public class Stack {
 
 ### Build my Queue
 
+[code](./algorithms101/src/main/java/datastructures/Queue.java)
+
 ```java
 package code;
 
@@ -803,3 +809,151 @@ public class Queue {
 ### Interview Stack and Queue
 
 ![StackAndQueue](./images/StackAndQueue.png)
+
+---
+
+## Hash Table
+
+An Array consists LinkedLists
+
+![hashtable](./images/hashtable.png)
+
+- hash function
+- convert hash into index
+- handle collision
+
+---
+
+### Hash funtion
+
+Calculated to numbers which can be used for lookup
+
+- the algorithm should be Fast
+- Gave even distributed numbers
+- Minimizes collisions
+
+---
+
+### Convert hash into index
+
+- Take hash can do % operator to convert hash into much smaller size index
+
+- ```int index = hashCode % INITIAL_SIZE;```
+- 通过求余数 来生成 index
+
+---
+
+### Handle collision
+
+- 当两个Obj 有同一个index的时候
+- 我们把这两个重复的 Objs 存入一个 LinkedList中 
+- Called **Chaining**
+
+---
+
+### Runtime
+
+- Search, insert, delete - O(1) - good hash table 
+- O(n) - bad hash table - which means you have a lot of collision - 可以导致变成O(n)
+
+---
+
+### Build my HashTable
+
+[code](./algorithms101/src/main/java/datastructures/HashTable.java)
+
+```java
+package code;
+
+import javax.swing.text.html.parser.Entity;
+
+public class HashTable {
+
+    // 哈希表就是一个数组 里面都是链表
+    private int INITIAL_SIZE = 16;
+    private HashEntry[] data; // LinkedList
+
+    class HashEntry {
+        String key;
+        String value;
+        HashEntry next;
+
+        HashEntry(String key, String value) {
+            this.key = key;
+            this.value = value;
+            this.next = null;
+        }
+    }
+
+    HashTable() {
+        data = new HashEntry[INITIAL_SIZE];
+    }
+
+    public void put(String key, String value) {
+
+        // Get the index
+        int index = getIndex(key);
+
+        // Create the linked list entry
+        HashEntry entry = new HashEntry(key, value);
+
+        // if no colision
+        if (data[index] == null) {
+            data[index] = entry;
+        } else {
+            // handle collision by adding to the end of Linked List
+            HashEntry entries = data[index];
+
+            // walk to the end
+            while (entries.next != null) {
+                entries = entries.next;
+            }
+            // add new entry
+            entries.next = entry;
+        }
+    }
+
+    public String get(String key) {
+
+        // get index
+        int index = getIndex(key);
+
+        // Get the current list of entries
+        HashEntry entries = data[index];
+
+        // 从链表中开始寻找对应的key
+        while (entries != null) {
+            if (entries.key.equals(key)) {
+                return entries.value;
+            }
+            entries = entries.next;
+        }
+        return null;
+    }
+
+    private int getIndex(String key) {
+        // get hashcode
+        int hashCode = key.hashCode();
+        System.out.println(hashCode);
+
+        // convert into index
+        int index = (hashCode & 0x7fffffff) & INITIAL_SIZE; // bitwise to make sure the index are all positive
+        // int index = hashCode & INITIAL_SIZE;
+
+        return index;
+    }
+}
+
+```
+
+---
+
+### Interview HashTable
+
+- Super fast lookup - O(1)
+- Understand what hashing algorithm does
+- Collisions are handled via **chaining**
+- Index (not hash) used only for lookups
+
+---
+
