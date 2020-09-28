@@ -1194,7 +1194,7 @@ SELECT
 FROM invoices i
 JOIN clients c
 		USING (client_id)
-WHERE payment_date IS NOT NULLinvoices_archived
+WHERE payment_date IS NOT NULL
 ```
 
 [Back to top](#sql)
