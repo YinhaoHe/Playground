@@ -15,6 +15,8 @@
 * [Combined search AND OR NOT](#combined-search-and-or-not)
 * [IN](#in)
 * [BETWEEN](#between)
+* [Functions](#Functions)
+* [GROUP BY](#GROUP-BY)
 * [LIKE](#like)
 * [REGEXP](#regexp)
 * [IS NULL](#is-null)
@@ -41,7 +43,13 @@
 * [Update a single row](#update-a-single-row)
 * [Update Multiple rows](#update-multiple-rows)
 * [Using Subqueries in Updates](#using-subqueries-in-updates)
+* [Nested Queries](#Nested-Queries)
 * [Delete Row](#delete-row)
+* [On Delete](#On-Delete)
+* [Trigger](#Trigger)
+* [ER diagrams](#ER-diagrams)
+* [Design ER diagram](#Design-ER-diagram)
+* [ER diagram mapping](#ER-diagram-mapping)
 
 ---
 
@@ -196,6 +204,20 @@ WHERE student_id = 4;
 
 ![works_withSchema](./images/works_withSchema.png)
 
+- set foreign key: ```FOREIGN KEY(mgr_id) REFERENCES employee(emp_id) ON DELETE SET NULL```
+- add foreign key: ```ALTER TABLE employee
+  ADD FOREIGN KEY(branch_id)
+  REFERENCES branch(branch_id)
+  ON DELETE SET NULL;```
+- composite key: ```CREATE TABLE works_with (
+    emp_id INT,
+    client_id INT,
+    total_sales INT,
+    PRIMARY KEY(emp_id, client_id),
+    FOREIGN KEY(emp_id) REFERENCES employee(emp_id) ON DELETE CASCADE,
+    FOREIGN KEY(client_id) REFERENCES client(client_id) ON DELETE CASCADE
+  );```
+
 ```sql
  CREATE TABLE employee (
   emp_id INT PRIMARY KEY,
@@ -320,6 +342,81 @@ INSERT INTO works_with VALUES(102, 406, 15000);
 INSERT INTO works_with VALUES(105, 406, 130000);
 ```
 
+```sql
+
+-- Find all employees
+SELECT *
+FROM employee;
+
+-- Find all clients
+SELECT *
+FROM clients;
+
+-- Find all employees ordered by salary
+SELECT *
+from employee
+ORDER BY salary ASC/DESC;
+
+-- Find all employees ordered by sex then name
+SELECT *
+from employee
+ORDER BY sex, name;
+
+-- Find the first 5 employees in the table
+SELECT *
+from employee
+LIMIT 5;
+
+-- Find the first and last names of all employees
+SELECT first_name, employee.last_name
+FROM employee;
+
+-- Find the forename and surnames names of all employees
+SELECT first_name AS forename, employee.last_name AS surname
+FROM employee;
+
+-- Find out all the different genders
+SELECT DISCINCT sex
+FROM employee;
+
+-- Find all male employees
+SELECT *
+FROM employee
+WHERE sex = 'M';
+
+-- Find all employees at branch 2
+SELECT *
+FROM employee
+WHERE branch_id = 2;
+
+-- Find all employee's id's and names who were born after 1969
+SELECT emp_id, first_name, last_name
+FROM employee
+WHERE birth_day >= 1970-01-01;
+
+-- Find all female employees at branch 2
+SELECT *
+FROM employee
+WHERE branch_id = 2 AND sex = 'F';
+
+-- Find all employees who are female & born after 1969 or who make over 80000
+SELECT *
+FROM employee
+WHERE (birth_day >= '1970-01-01' AND sex = 'F') OR salary > 80000;
+
+-- Find all employees born between 1970 and 1975
+SELECT *
+FROM employee
+WHERE birth_day BETWEEN '1970-01-01' AND '1975-01-01';
+
+-- Find all employees named Jim, Michael, Johnny or David
+SELECT *
+FROM employee
+WHERE first_name IN ('Jim', 'Michael', 'Johnny', 'David');
+
+
+```
+
 [Back to top](#sql)
 
 ---
@@ -421,6 +518,62 @@ WHERE state NOT IN ('VA', 'FL', 'GA')
 SELECT *
 FROM Customers
 WHERE points BETWEEN 1000 AND 3000
+```
+
+[Back to top](#sql)
+
+---
+
+### Functions
+
+```sql
+-- Find the number of employees
+SELECT COUNT(super_id)
+FROM employee;
+
+-- Find the average of all employee's salaries
+SELECT AVG(salary)
+FROM employee;
+
+-- Find the sum of all employee's salaries
+SELECT SUM(salary)
+FROM employee;
+
+-- Find out how many males and females there are
+SELECT COUNT(sex), sex
+FROM employee
+GROUP BY sex
+
+-- Find the total sales of each salesman
+SELECT SUM(total_sales), emp_id
+FROM works_with
+GROUP BY client_id;
+
+-- Find the total amount of money spent by each client
+SELECT SUM(total_sales), client_id
+FROM works_with
+GROUP BY client_id;
+
+```
+
+[Back to top](#sql)
+
+---
+
+### GROUP BY
+
+- 可以按照SELECT的内容 分组显示
+
+```sql
+-- Find out how many males and females there are
+SELECT COUNT(sex), sex
+FROM employee
+GROUP BY sex
+
+-- Find the total sales of each salesman
+SELECT SUM(total_sales), emp_id
+FROM works_with
+GROUP BY client_id;
 ```
 
 [Back to top](#sql)
@@ -610,7 +763,7 @@ JOIN products p
 USE sql_hr;
 
 SELECT
-	e.employee_id,
+		e.employee_id,
     e.first_name,
     m.first_name AS manager
 FROM employees e
@@ -630,9 +783,9 @@ JOIN employees m
 USE sql_store;
 
 SELECT
-	o.order_id,
+		o.order_id,
     o.order_date,
-	c.first_name,
+		c.first_name,
     c.last_name,
     os.name AS status
 FROM orders o
@@ -848,8 +1001,9 @@ ORDER BY c.first_name
 ### UNION
 
 - combine rows 从多个表中
+- combine 多个 SELECT statements
 - 使用 UNION 不仅仅可以在一个表中 结合多个行 也可以从多个不同的表中结合多个行
-- 但是要注意想要 UNION 的行必须要拥有相同数量的 col 不然就会报错
+- 但是要注意想要 UNION 的行必须**要拥有相同数量的 col** 不然就会报错
 - UNION 前面的表 决定了这一列叫什么名字 如下例子 2 shipper 在前面 所以结果的表列名叫做 name 如果 customers 表在前 那么结果中表的列名就会叫 first_name
 
 ```sql
@@ -903,6 +1057,23 @@ SELECT
     'Gold' AS type
 FROM customers
 WHERE points > 3000
+```
+
+```sql
+
+-- Find a list of employee and branch names
+SELECT employee.first_name AS Employee_Branch_Names
+FROM employee
+UNION
+SELECT branch.branch_name
+FROM branch;
+
+-- Find a list of all clients & branch suppliers' names
+SELECT client.client_name AS Non-Employee_Entities, client.branch_id AS Branch_ID
+FROM client
+UNION
+SELECT branch_supplier.supplier_name, branch_supplier.branch_id
+FROM branch_supplier;
 ```
 
 [Back to top](#sql)
@@ -1093,6 +1264,64 @@ WHERE client_id IN
 
 ---
 
+### Nested Queries
+
+```sql
+
+-- Find names of all employees who have sold over 50,000
+SELECT employee.first_name, employee.last_name
+FROM employee
+WHERE employee.emp_id IN (SELECT works_with.emp_id
+                          FROM works_with
+                          WHERE works_with.total_sales > 50000);
+
+-- Find all clients who are handles by the branch that Michael Scott manages
+-- Assume you know Michael's ID
+SELECT client.client_id, client.client_name
+FROM client
+WHERE client.branch_id = (SELECT branch.branch_id
+                          FROM branch
+                          WHERE branch.mgr_id = 102);
+
+ -- Find all clients who are handles by the branch that Michael Scott manages
+ -- Assume you DONT'T know Michael's ID
+ SELECT client.client_id, client.client_name
+ FROM client
+ WHERE client.branch_id = (SELECT branch.branch_id
+                           FROM branch
+                           WHERE branch.mgr_id = (SELECT employee.emp_id
+                                                  FROM employee
+                                                  WHERE employee.first_name = 'Michael' AND employee.last_name ='Scott'
+                                                  LIMIT 1));
+
+
+-- Find the names of employees who work with clients handled by the scranton branch
+SELECT employee.first_name, employee.last_name
+FROM employee
+WHERE employee.emp_id IN (
+                         SELECT works_with.emp_id
+                         FROM works_with
+                         )
+AND employee.branch_id = 2;
+
+-- Find the names of all clients who have spent more than 100,000 dollars
+SELECT client.client_name
+FROM client
+WHERE client.client_id IN (
+                          SELECT client_id
+                          FROM (
+                                SELECT SUM(works_with.total_sales) AS totals, client_id
+                                FROM works_with
+                                GROUP BY client_id) AS total_client_sales
+                          			WHERE totals > 100000
+);
+
+```
+
+[Back to top](#sql)
+
+---
+
 ### Delete Row
 
 - 使用 DELETE FROM
@@ -1110,3 +1339,166 @@ WHERE client_id = (
 [Back to top](#sql)
 
 ---
+
+### On Delete
+
+当从employee表中删除一个record时，ID就无效了，这时候如果别的表中把这个record的id当作外键，这个表中的这个record也应该变成无效的，为了解决这一个问题，我们使用到如下两种方法解决
+
+- ```ON DELETE SET NULL``` 当这个Foreign key 不是主键的一部分的时候 可以使用这种
+
+当删除一个ID: 102 时，branch 中所有用到ID102的地方，对应的地方，不是一整条record 会被set to null
+
+```sql
+CREATE TABLE branch (
+  branch_id INT PRIMARY KEY,
+  branch_name VARCHAR(40),
+  mgr_id INT,
+  mgr_start_date DATE,
+  FOREIGN KEY(mgr_id) REFERENCES employee(emp_id) ON DELETE SET NULL
+);
+```
+
+- ```ON DELETE CASCADE``` 当这个Foreign key is also a part of Primary Key 时候, 必须使用 CASCADE
+
+当删除一个 branch_id = 2 时，branch supplier 表中所有是branch id = 2 的record 都会被删除
+
+```sql
+CREATE TABLE branch_supplier (
+  branch_id INT,
+  supplier_name VARCHAR(40),
+  supply_type VARCHAR(40),
+  PRIMARY KEY(branch_id, supplier_name),
+  FOREIGN KEY(branch_id) REFERENCES branch(branch_id) ON DELETE CASCADE
+);
+```
+
+[Back to top](#sql)
+
+---
+
+### Trigger
+
+- 当做什么事情的时候，需要MySQL做某某事
+- ```DELIMITER``` 是类似于 ; 用来分隔一句sql语句，重写DELIMITER
+
+```sql
+
+-- CREATE
+--     TRIGGER `event_name` BEFORE/AFTER INSERT/UPDATE/DELETE
+--     ON `database`.`table`
+--     FOR EACH ROW BEGIN
+-- 		-- trigger body
+-- 		-- this code is applied to every
+-- 		-- inserted/updated/deleted row
+--     END;
+
+CREATE TABLE trigger_test (
+     message VARCHAR(100)
+);
+
+
+
+
+DELIMITER $$
+CREATE
+    TRIGGER my_trigger BEFORE INSERT
+    ON employee
+    FOR EACH ROW BEGIN
+        INSERT INTO trigger_test VALUES('added new employee');
+    END$$
+DELIMITER ;
+INSERT INTO employee
+VALUES(109, 'Oscar', 'Martinez', '1968-02-19', 'M', 69000, 106, 3);
+
+
+DELIMITER $$
+CREATE
+    TRIGGER my_trigger BEFORE INSERT
+    ON employee
+    FOR EACH ROW BEGIN
+        INSERT INTO trigger_test VALUES(NEW.first_name);
+    END$$
+DELIMITER ;
+INSERT INTO employee
+VALUES(110, 'Kevin', 'Malone', '1978-02-19', 'M', 69000, 106, 3);
+
+DELIMITER $$
+CREATE
+    TRIGGER my_trigger BEFORE INSERT
+    ON employee
+    FOR EACH ROW BEGIN
+         IF NEW.sex = 'M' THEN
+               INSERT INTO trigger_test VALUES('added male employee');
+         ELSEIF NEW.sex = 'F' THEN
+               INSERT INTO trigger_test VALUES('added female');
+         ELSE
+               INSERT INTO trigger_test VALUES('added other employee');
+         END IF;
+    END$$
+DELIMITER ;
+INSERT INTO employee
+VALUES(111, 'Pam', 'Beesly', '1988-02-19', 'F', 69000, 106, 3);
+
+
+DROP TRIGGER my_trigger;
+
+```
+
+[Back to top](#sql)
+
+---
+
+### ER diagrams
+
+- ER Diagram Template
+
+![erd-template](./images/erd-template.png)
+
+- Student Diagram
+
+![student-erd](./images/student-erd.png)
+
+[Back to top](#sql)
+
+---
+
+### Design ER diagram
+
+- problem statement: Company Data Storage Requirements
+  - The company is organized into branches. Each branch has a unique number, a name, and a particular employee who manages it.
+  - The company makes it’s money by selling to clients. Each client has a name and a unique number to identify it.
+  - The foundation of the company is it’s employees. Each employee has a name, birthday, sex, salary and a unique number.
+  - An employee can work for one branch at a time, and each branch will be managed by one of the employees that work there. We’ll also want to keep track of when the current manager started as manager.
+  - An employee can act as a supervisor for other employees at the branch, an employee may also act as the supervisor for employees at other branches. An employee can have at most one supervisor.
+  - A branch may handle a number of clients, with each client having a name and a unique number to identify it. A single client may only be handled by one branch at a time.
+  - Employees can work with clients controlled by their branch to sell them stuff. If nescessary multiple employees can work with the same client. We’ll want to keep track of how many dollars worth of stuff each employee sells to each client they work with.
+  - Many branches will need to work with suppliers to buy inventory. For each supplier we’ll keep track of their name and the type of product they’re selling the branch. A single supplier may supply products to multiple branches.
+- Company ER diagram
+
+![company-erd](./images/company-erd.png)
+
+[Back to top](#sql)
+
+---
+
+### ER diagram mapping
+
+- Company database Schema
+  - Step1: Mapping of Regular Entity Types: 
+    - For each regular entity type create a relation (table) that includes all the simple attributes of that entity
+  - Step2: Mapping of Weak Entity Types: 
+    - For each weak entity type create a relation (table) that includes all simple attributes of the weak entity
+    - The primary key of the new relation should be the partial key of the weak entity plus the primary key of its owner
+  - Step3: Mapping of Binary 1 : 1 Relationship Types:
+    - Include one side of the relationship as a foreign key in the other Favor total participation (双向关系优先，把单向关系主键作为外键放在双向关系中)
+  - Step4: Mapping of Binary 1 : N Relationship Types:
+    - Include the **1** side's primary key as a foreign key on the **N** side relation (table)
+  - Step5: Mapping of Binary M : N Relationship Types:
+    - Create a new relation (table) who's primary key is a combination of both entities' primary key's. Also include any relationship attributes.
+
+![company-relations](./images/company-relations.png)
+
+[Back to top](#sql)
+
+---
+

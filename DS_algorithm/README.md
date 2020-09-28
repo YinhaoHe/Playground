@@ -1514,3 +1514,5 @@ public class MaxBinaryHeap {
 
 ---
 
+## AVL Trees
+
