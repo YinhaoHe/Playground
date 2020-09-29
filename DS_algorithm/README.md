@@ -1516,3 +1516,223 @@ public class MaxBinaryHeap {
 
 ## AVL Trees
 
+- BST 
+- After insert or delete, it will do a rebalance
+
+1. Left Left case: 一个树两个节点连续偏向左，导致树倾斜，需要rotate to the right
+2. Right Right case: 一个树两个节点连续偏向右，导致树skewd，需要rotate to the left
+3. Left Right case: 一个树两个节点先偏向左，再偏向右，导致树不平衡，需要rotate to the left first, 然后会形成一个 Left Left case, 此时再rotate to the right
+4. Right Left case: 一个树两个节点先偏向右，再偏向左，导致树不平衡，需要rotate to the right first, 然后会形成一个 Right Right case, 此时再rotate to the left
+
+[Back to top](#Data-Structure)
+
+---
+
+**The Algorithm**
+
+- Regular BST insert
+- Track the height
+- Determine balance factor - difference in height can't be > 1
+- 4 cases
+
+[Back to top](#Data-Structure)
+
+---
+
+### Build my AVLTree
+
+[code](./algorithms101/src/main/java/algorithms/AVLTree.java)
+
+[deleteCode](https://www.geeksforgeeks.org/avl-tree-set-2-deletion/)
+
+[codeOnline](https://www.geeksforgeeks.org/avl-tree-set-1-insertion/)
+
+```java
+package code;
+
+import sun.awt.www.content.audio.x_aiff;
+
+class Node {
+    int key, height;
+    Node left, right;
+
+    Node(int d) {
+        key = d;
+        height = 1;
+    }
+}
+
+public class AVLTree {
+
+    Node root;
+
+    int height(Node N) {
+        if (N == null) {
+            return 0;
+        }
+        return N.height;
+    }
+
+    int max (int a, int b) {
+        return (a > b) ? a : b;
+    }
+/**
+ *       y          
+ *      /
+ *     x     =>         x
+ *    / \              / \
+ *  10   T2          10   y
+ *                       /
+ *                     T2
+ */
+    Node rightRotate(Node y) {
+        Node x = y.left;
+        Node T2 = x.right;
+        
+        // Perform rotation
+        x.right = y;
+        y.left = T2;
+
+        y.height = max(height(y.left), height(y.right)) + 1;
+        x.height = max(height(x.left), height(x.right)) + 1;
+
+        return x;
+    }
+
+    Node leftRotate(Node x) {
+        Node y = x.right;
+        Node T2 = y.left;
+
+        // Perform rotation
+        y.left = x;
+        x.right = T2;
+
+        y.height = max(height(y.left), height(y.right)) + 1;
+        x.height = max(height(x.left), height(x.right)) + 1;
+
+        return y;
+    }
+
+    // Get balance factor of Node N
+    int getBalance(Node N) {
+        if (N == null)
+            return 0;
+
+        return height(N.left) - height(N.right);
+    }
+
+    void insert (int key) {
+        root = insert(root, key);
+    }
+
+    Node insert(Node node, int key) {
+        if (node == null)
+            return (new Node(key));
+
+        if (key < node.key)
+            node.left = insert(node.left, key);
+        else if (key > node.key)
+            node.right = insert(node.right, key);
+        else 
+            return node;
+
+        // update height
+        node.height = 1 + max(height(node.left), height(node.right));
+
+        int balance = getBalance(node);
+
+        if (balance > 1 && key < node.left.key) {
+            return rightRotate(node);
+        }
+
+        if (balance < -1 && key > node.right.key) {
+            return leftRotate(node);
+        }
+
+        if (balance > 1 && key > node.left.key) {
+            node.left = leftRotate(node.left);
+            return rightRotate(node);
+        }
+
+        if (balance < -1 && key < node.right.key) {
+            node.right = rightRotate(node.right);
+            return leftRotate(node);
+        }
+
+        return node;
+    }
+}
+
+```
+
+[Back to top](#Data-Structure)
+
+---
+
+### Interview AVLTree
+
+- Just a BST with rebalance feature
+- regular BST insertion
+- tracks height / 4 cases
+
+[Back to top](#Data-Structure)
+
+---
+
+## Red Black Tree
+
+- Very similar to AVL tree
+
+- 也是解决BST不平衡问题
+- AVL 只要产生了skew 就一定要rotation
+- Red Black 可以接受一定程度的不平衡 不会每次都做一次rotation performance会好一点
+- 添加新的节点的时候 红黑树 会一层一层染色 一层黑色一层红色
+
+[Back to top](#Data-Structure)
+
+---
+
+### Rules for Coloring
+
+- Every node is either redd or black
+- Root of tree is always black
+- No two adjacent nodes can be red - Parent/child
+- Every path from top to bottom has to have same number of black nodes
+
+[Back to top](#Data-Structure)
+
+---
+
+### Pseudo code
+
+![RedBlackTree](./images/RedBlackTree.png)
+
+[Back to top](#Data-Structure)
+
+---
+
+### AVL Red Black Trees Interview Questions
+
+- Which algorithm would you use if you wanted database lookups to be fast? Why?
+  - Use AVL, because it keeps the BST balanced
+  - lookup could be quicker
+- If you were to use one of these algorithms in a language library, which would it be?
+  - Use Red-black, because there are a lot of insert/delete
+  - the coloring save the rotations
+  - Used for **TreeMap** in Java
+
+[Back to top](#Data-Structure)
+
+---
+
+### Interview Red-Black Tree
+
+- Red-Black is self balancing BST
+- More performant than AVL
+- Used Red-Black when many inserts/deletes
+- Favor AVL otherwise (more balanced)
+
+[Back to top](#Data-Structure)
+
+---
+
