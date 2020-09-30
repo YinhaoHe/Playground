@@ -1736,3 +1736,114 @@ public class AVLTree {
 
 ---
 
+## Memoization
+
+- Fibonacci - recursion - very slow - O(2^n)
+- Memoization - fast - O(n)
+
+[Back to top](#Data-Structure)
+
+---
+
+### Build my memoized Fibonacci series
+
+Fib naive
+
+```java
+package code;
+
+public class Fibnaive {
+    public int fib(int n) {
+        if (n <= 0) {
+            return 0;
+        } else if (n == 1) {
+            return 1;
+        } else {
+            return fib(n - 1) + fib(n - 2);
+        }
+    }
+}
+
+```
+
+Fib memoized
+
+```java
+package code;
+
+public class Fibmemorized {
+
+    private int[] memo = new int[1000];
+
+    public int fib(int n) {
+        if (n <= 0) {
+            return 0;
+        } else if (n == 1) {
+            return 1;
+        } else if (memo[n] == 0) {
+            memo[n] = fib(n - 1) + fib(n - 2);
+        }
+        return memo[n];
+    }
+}
+
+```
+
+[Back to top](#Data-Structure)
+
+---
+
+### Interview Memorization
+
+- Fib - recursion
+- Memoization - OPT -优化 - DP
+
+[Back to top](#Data-Structure)
+
+---
+
+## Sorting
+
+### Bubble Sort
+
+- O(n^2)
+
+```java
+package code;
+
+public class BubbleSort {
+
+    public int[] bubbleSort(int arr[]) {
+        int n = arr.length;
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+        return arr;
+    }
+
+}
+
+```
+
+[Back to top](#Data-Structure)
+
+---
+
+### Merge Sort
+
+![mergeSort](./images/mergeSort.png)
+
+```java
+
+```
+
+[Back to top](#Data-Structure)
+
+---
+
