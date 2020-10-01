@@ -1,5 +1,100 @@
 # Data Structure
 
+- [Data Structure](#data-structure)
+  * [Array](#array)
+    + [Array DS vs Array API](#array-ds-vs-array-api)
+    + [Three things about Arrays](#three-things-about-arrays)
+    + [Array Killer features](#array-killer-features)
+    + [Insert into Array](#insert-into-array)
+    + [Delete in Array](#delete-in-array)
+    + [Dynamic Arrays](#dynamic-arrays)
+    + [Build my dynamicArray](#build-my-dynamicarray)
+    + [Error handling](#error-handling)
+    + [Interview Array](#interview-array)
+  * [Linked List](#linked-list)
+    + [Linked List vs Array](#linked-list-vs-array)
+    + [Add Front](#add-front)
+    + [getFirst](#getfirst)
+    + [getLast](#getlast)
+    + [addBack](#addback)
+    + [size](#size)
+    + [clear](#clear)
+    + [Delete value](#delete-value)
+    + [print](#print)
+    + [Double Linked List](#double-linked-list)
+    + [Build my LinkedList](#build-my-linkedlist)
+    + [Interview LinkedList](#interview-linkedlist)
+    + [Array vs ArrayList vs Linked List](#array-vs-arraylist-vs-linked-list)
+      - [Differences](#differences)
+      - [When to use](#when-to-use)
+  * [Big O Notation](#big-o-notation)
+    + [Rule of thumb](#rule-of-thumb)
+    + [Practices](#practices)
+    + [Two examples](#two-examples)
+    + [Interview Big O Notation](#interview-big-o-notation)
+  * [Stacks and Queues](#stacks-and-queues)
+    + [Push to Stack](#push-to-stack)
+    + [Pop from Stack](#pop-from-stack)
+    + [Add to Queue](#add-to-queue)
+    + [Remove from Queue](#remove-from-queue)
+    + [Runtime](#runtime)
+    + [Build my Stack](#build-my-stack)
+    + [Build my Queue](#build-my-queue)
+    + [Interview Stack and Queue](#interview-stack-and-queue)
+  * [Hash Table](#hash-table)
+    + [Hash funtion](#hash-funtion)
+    + [Convert hash into index](#convert-hash-into-index)
+    + [Handle collision](#handle-collision)
+    + [Runtime](#runtime-1)
+    + [Build my HashTable](#build-my-hashtable)
+    + [Interview HashTable](#interview-hashtable)
+  * [Binary Tree](#binary-tree)
+    + [Binary Search Tree (BST)](#binary-search-tree--bst-)
+    + [Find](#find)
+    + [insert](#insert)
+    + [find min](#find-min)
+    + [delete](#delete)
+    + [Depth First Traversal](#depth-first-traversal)
+    + [Build my Binary Search Tree](#build-my-binary-search-tree)
+    + [Runtime](#runtime-2)
+    + [Interview Binary Search Tree](#interview-binary-search-tree)
+  * [Binary Heaps](#binary-heaps)
+    + [properities](#properities)
+    + [Binary Heap implementation](#binary-heap-implementation)
+    + [Insert](#insert)
+    + [Extract the max](#extract-the-max)
+    + [Space efficiency](#space-efficiency)
+    + [Build my Binary Heap](#build-my-binary-heap)
+    + [Runtime](#runtime-3)
+    + [Interview Binary Heap](#interview-binary-heap)
+  * [AVL Trees](#avl-trees)
+    + [Build my AVLTree](#build-my-avltree)
+    + [Interview AVLTree](#interview-avltree)
+  * [Red Black Tree](#red-black-tree)
+    + [Rules for Coloring](#rules-for-coloring)
+    + [Pseudo code](#pseudo-code)
+    + [AVL Red Black Trees Interview Questions](#avl-red-black-trees-interview-questions)
+    + [Interview Red-Black Tree](#interview-red-black-tree)
+  * [Memoization](#memoization)
+    + [Build my memoized Fibonacci series](#build-my-memoized-fibonacci-series)
+    + [Interview Memorization](#interview-memorization)
+  * [Sorting](#sorting)
+    + [Bubble Sort](#bubble-sort)
+    + [Merge Sort](#merge-sort)
+    + [Quick Sort](#quick-sort)
+    + [Interview Sorting](#interview-sorting)
+  * [Graphs](#graphs)
+    + [Edge List](#edge-list)
+    + [Adjacency Matrix](#adjacency-matrix)
+    + [Adjacency List](#adjacency-list)
+    + [Breadth First Search](#breadth-first-search)
+    + [Build my BFS](#build-my-bfs)
+    + [Depth First Search](#depth-first-search)
+    + [Build my DFS](#build-my-dfs)
+    + [Interview Graph](#interview-graph)
+
+---
+
 ## Array
 
 ### Array DS vs Array API
@@ -1918,6 +2013,296 @@ public class MergeSort {
 }
 
 ```
+
+[Back to top](#Data-Structure)
+
+---
+
+### Quick Sort
+
+- O(NlogN)
+
+![Quick Sort](./images/QuickSort.png)
+
+```java
+package algorithms;
+
+public class QuickSort {
+
+    public int[] sort(int[] array) {
+        // Pick a pivot element randomly
+
+        // Walk through the array making sure that all the elements
+        // are smaller before the pivot, and that all elements after are bigger
+        // and we do this in place! That's the killer feature. No extra array required.
+        //
+        // Then we repeat the process to the left and right portions over and over again
+        // Then eventually our array becomes sorted.
+
+        quickSort(array, 0, array.length - 1);
+
+        return array;
+    }
+
+    private void quickSort(int[] array, int left, int right) {
+        if (left >= right) {
+            return;
+        }
+
+        // Step 1: Pick a pivot element - we will choose the center
+        // Better would be to choose left + (right-left)/2 (as this would avoid overflow error for large arrays i.e. 2GB))
+        int pivot = array[(left + right)/2];
+
+        // Step 2: Partition the array around this pivot - return the index of the partition
+        int index = partition(array, left, right, pivot);
+
+        // Step 3: Sort on the left and the right side
+        quickSort(array, left, index - 1);
+        quickSort(array, index, right);
+    }
+
+    private int partition(int[] array, int left, int right, int pivot) {
+        // Move the left and right pointers in towards each other
+        while (left <= right) {
+
+            // Move left until you find an element bigger than the pivot
+            while(array[left] < pivot) {
+                left++;
+            }
+
+            // Move right until you find an element smaller than the pivot
+            while (array[right] > pivot) {
+                right--;
+            }
+
+            // Then swap
+            if (left <= right) {
+                swap(array, left, right);
+                left++;
+                right--;
+            }
+        }
+
+        // When we get here, everything in this partition will be in the right order
+        // Now we need to return next partition point - which for us will be left
+        return left;
+    }
+
+    private void swap(int[] array, int left, int right) {
+        int temp = array[left];
+        array[left] = array[right];
+        array[right] = temp;
+    }
+
+    public void prettyPrint(int[] a) {
+        for (int i = 0; i < a.length; i++) {
+            System.out.println(a[i]);
+        }
+    }
+}
+```
+
+[Back to top](#Data-Structure)
+
+---
+
+### Interview Sorting
+
+- Bubble sort - O(n^2)
+- Merge sort - O(NlogN)
+- Quick sort - O(NlogN) - fastest!
+
+[Back to top](#Data-Structure)
+
+---
+
+## Graphs
+
+- A graph **G** is an ordered pair of  a set of vertices **V** and a set of edges **E**.
+- G = (V, E)
+- Edges:
+  - Directed: e.g. Binary tree
+  - Undirected - bidirectional
+- Weight: 每条边有一个Weight (成本)
+
+[Back to top](#Data-Structure)
+
+---
+
+### Edge List
+
+![EdgeList](./images/EdgeList.png)
+
+[Back to top](#Data-Structure)
+
+---
+
+### Adjacency Matrix
+
+![AdjacencyMatrix](./images/AdjacencyMatrix.png)
+
+[Back to top](#Data-Structure)
+
+---
+
+### Adjacency List
+
+![AdjacencyList](./images/AdjacencyList.png)
+
+[Back to top](#Data-Structure)
+
+---
+
+### Breadth First Search
+
+- used for social graphs, recommendations, nearest neighbours
+- Used **Queue** to implement
+
+[Back to top](#Data-Structure)
+
+---
+
+### Build my BFS
+
+```java
+package algorithms.graphs.BFS;
+
+import java.util.*;
+
+class Graph
+{
+    private int V;                     // No. of vertices
+    private LinkedList<Integer> adj[]; // Adjacency Lists
+
+    Graph(int v) {
+        V = v;
+        adj = new LinkedList[v];
+        for (int i = 0; i < v; ++i)
+            adj[i] = new LinkedList();
+    }
+
+    void addEdge(int v, int w) {
+        adj[v].add(w);
+    }
+
+    // BFS traversal from a given source s
+    void BFS(int s) {
+        // Mark all the vertices as not visited (false)
+        boolean visited[] = new boolean[V];
+
+        // Create a queue for BFS
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+
+        // Mark the current node as visited and enqueue it
+        visited[s] = true;
+        System.out.println("Starting at " + s);
+        queue.add(s);
+
+        while (queue.size() != 0) {
+            // Dequeue a vertex from queue and print it
+            s = queue.poll();
+            System.out.println("De-queueing " + s);
+//            System.out.print(s + " ");
+
+            // Get all adjacent vertices of the de-queued vertex s
+            // If a adjacent has not been visited, then mark it
+            // visited and enqueue it
+            Iterator<Integer> i = adj[s].listIterator();
+            while (i.hasNext()) {
+                int n = i.next();
+                if (!visited[n]) {
+                    visited[n] = true;
+                    System.out.println("Queueing " + n);
+                    queue.add(n);
+                }
+            }
+        }
+    }
+}
+
+// based on https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
+```
+
+[Back to top](#Data-Structure)
+
+---
+
+### Depth First Search
+
+- Used for circle detection, path finding..
+- Used **Stack** to implement
+
+[Back to top](#Data-Structure)
+
+---
+
+### Build my DFS
+
+```java
+package algorithms.graphs.DFS;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Stack;
+
+@SuppressWarnings("unchecked")
+class Graph
+{
+    private int V;             // No. of vertices
+    private LinkedList[] adj;  // Adjacency List
+
+    Graph(int v) {
+        V = v;
+        adj = new LinkedList[v];
+        for (int i=0; i<v; ++i)
+            adj[i] = new LinkedList();
+    }
+
+    void addEdge(int v, int w) {
+        adj[v].add(w);
+    }
+
+    void DFS(int v)
+    {
+        boolean visited[] = new boolean[V];
+
+        Stack<Integer> stack = new Stack<Integer>();
+        stack.add(v);
+
+        visited[v] = true;
+
+        while (!stack.isEmpty()) {
+            int current = stack.pop();
+            System.out.print(current + " ");
+
+            Iterator<Integer> i = adj[current].listIterator();
+            while (i.hasNext())
+            {
+                int n = i.next();
+                if (!visited[n]) {
+                    stack.add(n);
+                    visited[n] = true;
+                }
+            }
+        }
+    }
+
+    // based on https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/
+}
+```
+
+[Back to top](#Data-Structure)
+
+---
+
+### Interview Graph
+
+| Breadth First                 | Depth First                |
+| ----------------------------- | -------------------------- |
+| Better near the top           | Better far away            |
+| Social networks (FB LinkedIn) | Game simulations(chess AI) |
+| Nearby peers in games         |                            |
+| **Queue**                     | **Stack**                  |
 
 [Back to top](#Data-Structure)
 
