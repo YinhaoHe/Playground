@@ -1,5 +1,2 @@
 # Playground
-Pop-ups & fun ideas & notes
-
-
-
+Pop-ups & fun ideas & notes 
