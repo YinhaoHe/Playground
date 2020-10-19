@@ -26,7 +26,8 @@
 - Long - long - 64 bits - ``` long number = 100L; ```
 - Float - float - single precision 单精度 - 32 bits - ``` float number = 5.25f; ```
 - Double - double - double precision 双精度 - 64 bits - ``` double number = 5.25d; ```
-- 
+- Character - char - 16 bits - 一个char只能存储一个字符
+- Boolean - boolean - 8 bits
 
 ### Casting
 
