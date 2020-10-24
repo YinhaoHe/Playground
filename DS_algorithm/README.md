@@ -1412,7 +1412,7 @@ public class BinarySearchTree {
 
 ### Binary Heap implementation
 
-![binaryHeap](./images/binaryHeap.png)
+![binaryHeap](./images/BinaryHeap.png)
 
 [Back to top](#Data-Structure)
 
