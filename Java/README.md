@@ -535,7 +535,7 @@ super()
 public class A {
   	private B b;
   	private int id;
-}
+} 
 ```
 
 ```java
