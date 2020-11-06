@@ -16,6 +16,8 @@
 
 ---
 
+## React
+
 ### React Angular
 
 The reason react is called react because it reacts to the state.
@@ -224,6 +226,4 @@ return (
 
 ---
 
-React Hooks
-
-useState
+## React hooks
