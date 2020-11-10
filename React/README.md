@@ -742,3 +742,84 @@ const NavBar = ({totalCounters}) => {
 - Update
   - `render` - any update will call render to render the whole components tree
   - `componentDidUpdate(prevProps, prevState)` - 可以访问之前的props和state 判断一下如果不同 可以发送新的Ajax请求到后端要数据
+- Unmount
+  - `componentWillUnmount()` - when delete a component; entire tree will be re-rendered. 
+
+[Back to top](#react)
+
+---
+
+## React Hooks
+
+A.K.A **functional component** - **also stateful** 
+
+- 出现hook的概念因为 class 很麻烦不适合新的开发者
+- deal with this keyword can be hard
+- boilerplate code needed to create a class
+
+Example:
+
+- Class implementation:
+
+![](./images/classImplementation.png)
+
+- hooks implementation:
+
+![](./images/hooksImplementation.png)
+
+[Back to top](#react)
+
+---
+
+## useState
+
+- useState 会返回一个array
+- array[0] 是 this.state.count
+- array[1] 是 this.setState()
+
+`const [count, setCount] = useState(0);`
+
+- **cannot call hooks inside loops, condition or nested functions** 
+
+## useEffect
+
+- Implement all the logic in `useEffect()`
+
+```jsx
+useEffect(() => {
+  document.title = `${name} has clicked ${count} times!`;
+  
+  return () => { // equal to componentWillUnmount
+    
+  }
+}, [count, name]);
+// count and name means useEffect会自动更新count 和 name
+```
+
+- fetching data with hooks
+
+useEffect 里面不能直接写 async
+
+因此要在callback里面再定义一个async；并且要手动调用一次这个function 因为他不会自动被调用
+
+![](./images/fetchingDataHooks.png)
+
+## custom hooks
+
+```jsx
+import { useEffect } from 'react';
+
+export default function useDocumentTitle(title) {
+  useEffect(() => {
+    document.title = title;
+    
+    return () => {
+      console.log("clean up")
+    };
+  });
+}
+```
+
+## Context
+
+![](./images/useContext.png)

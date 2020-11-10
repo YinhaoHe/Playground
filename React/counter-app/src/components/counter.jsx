@@ -12,10 +12,10 @@ class Counter extends Component {
   // //   this.handleIncrement = this.handleIncrement.bind(this);
   // // }
 
-  // styles = {
-  //   fontSize: 10,
-  //   fontWeight: "bold",
-  // };
+  styles = {
+    fontSize: 10,
+    fontWeight: "bold",
+  };
 
   // handleIncrement = (product) => {
   //   console.log(product);
