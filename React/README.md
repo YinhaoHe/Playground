@@ -327,7 +327,7 @@ handleIncrement = (product) => {
 
 <button
   onClick={() => {
-    this.handleIncrement(product)
+    this.handleIncrement(product);
   }}
   className="btn btn-secondary btn-sm"
 >
@@ -361,4 +361,384 @@ return (
 
 ---
 
-#
+## Composing Components
+
+- Combine multiple components together to be one component
+- Counters 里面可以 render 很多个不同的 counter 每个 counter 都有自己的 state
+
+```jsx
+import React, { Component } from "react";
+import Counter from "./counter";
+
+class Counters extends Component {
+  state = {};
+
+  render() {
+    return (
+      <div>
+        <Counter />
+        <Counter />
+        <Counter />
+        <Counter />
+      </div>
+    );
+  }
+}
+
+export default Counters;
+```
+
+[Back to top](#react)
+
+---
+
+## Passing data to components
+
+- 在 counters 里面给每一个 counter 初始化
+
+Counters.jsx
+
+```jsx
+import React, { Component } from "react";
+import Counter from "./counter";
+
+class Counters extends Component {
+  state = {
+    counters: [
+      { id: 1, value: 4 },
+      { id: 2, value: 0 },
+      { id: 3, value: 0 },
+      { id: 4, value: 0 },
+    ],
+  };
+
+  render() {
+    return (
+      <div>
+        {this.state.counters.map((counter) => (
+          <Counter key={counter.id} value={counter.value} />
+        ))}
+      </div>
+    );
+  }
+}
+
+export default Counters;
+```
+
+Counter.jsx
+
+```jsx
+import React, { Component } from "react";
+
+class Counter extends Component {
+  state = {
+    value: this.props.value
+};
+```
+
+[Back to top](#react)
+
+---
+
+## Passing Children
+
+- **When we want to return something between an opening and closing tags in an element**
+- 如果想要 render anything in close tags; 可以使用 children
+- `this.props.children`
+
+Counters.jsx
+
+```jsx
+import React, { Component } from "react";
+import Counter from "./counter";
+
+class Counters extends Component {
+  state = {
+  };
+
+  render() {
+    return (
+      <div>
+        {this.state.counters.map((counter) => (
+          <Counter key={counter.id} value={counter.value} />
+          <h4>Counter #{counter.id}</h4h4>
+          </Counter>
+        ))}
+      </div>
+    );
+  }
+}
+
+export default Counters;
+```
+
+Counter.jsx
+
+```jsx
+render() {
+    return (
+      <div>
+        {this.props.children}
+      </div>
+    );
+  }
+```
+
+[Back to top](#react)
+
+---
+
+## Props vs State
+
+- Props :
+
+  - Data that is given to a component;
+
+  - **Read-only** cannot change props
+
+  - Cannot change the prop of a component within this component
+
+  - 是父亲传给儿子的 Counters 是父亲 在 render 时 给儿子 Counter 传入了 value = {counter.value}
+
+  - ```jsx
+    {this.state.counters.map((counter) => (
+              <Counter key={counter.id} value={counter.value} />
+              <h4>Counter #{counter.id}</h4h4>
+              </Counter>
+            ))}
+    ```
+
+  - key 只能 react 内部访问 所以不算是 props 的一部分
+
+- State:
+
+  - Data that is local or private to that component;
+  - other components cannot access that state
+  - Can change the state of a component within this component
+
+[Back to top](#react)
+
+---
+
+## Raise and Handle events
+
+- React 中如果想要修改一个 component 的 state 必须要在这个 component 里面去进行修改或删除
+- 因此当我们想在另外一个组件中修改这个组件的 state 时，需要用到 raise and handle events
+- 在想要修改的 component 中 raise event - example: onDelete
+- 在真正完成修改的 component 中 handle event - example : handleDelete()
+
+raise - onDelete - 孩子 rasie
+
+```jsx
+render() {
+    return (
+      <div>
+
+        <button onClick={this.props.onDelete}> </button>
+
+      </div>
+    );
+  }
+```
+
+handle - handleDelete() - 父亲 handle
+
+```jsx
+  handleDelete = () => {
+    console.log("Event Handler Called");
+  };
+
+  render() {
+    return (
+      <div>
+        {this.state.counters.map((counter) => (
+          <Counter
+            key={counter.id}
+            onDelete={this.handleDelete}
+            counter={counter}
+          />
+        ))}
+      </div>
+    );
+  }
+}
+```
+
+- 尽可能的把相关的东西放在一个 Obj 中使用 - 在 props 中 尽可能的封装
+- 直接把 counter 作为 props 传给儿子
+
+[Back to top](#react)
+
+---
+
+## Remove local State aka controlled components
+
+- Between different components, it is better to let one component control the other one;
+- It means the controlled component does not have state
+- It acquires all data from the component that is controlling it
+- 当想要在这个被控制的组件中 update state 时 - raise an event
+- 父亲组件会 handle event
+
+儿子 counter.jsx
+
+```jsx
+import React, { Component } from "react";
+
+class Counter extends Component {
+  render() {
+    return (
+      <div>
+        <img src={this.state.imageUrl} alt="" />
+        <span style={this.styles} className={this.getBadgeClasses()}>
+          {this.formatCount()}
+        </span>
+        <button
+          onClick={() => this.props.onIncrement(this.props.counter)}
+          className="btn btn-secondary btn-sm"
+        >
+          Increment
+        </button>
+        <button onClick={this.props.onDelete}> </button>
+        <ul>
+          {this.state.tags.map((tag) => (
+            <li key={tag}>{tag}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  getBadgeClasses() {
+    let classes = "badge m-2 badge-";
+    classes += this.props.counter.value === 0 ? "warning" : "primary";
+    return classes;
+  }
+
+  formatCount() {
+    const { value } = this.props.counter;
+    return value === 0 ? "Zero" : value;
+  }
+}
+
+export default Counter;
+```
+
+父亲 counters.jsx
+
+```jsx
+import React, { Component } from "react";
+import Counter from "./counter";
+
+class Counters extends Component {
+  state = {
+    counters: [
+      { id: 1, value: 4 },
+      { id: 2, value: 0 },
+      { id: 3, value: 0 },
+      { id: 4, value: 0 },
+    ],
+  };
+
+  handleDelete = (counterId) => {
+    const counters = this.state.counters.filter((c) => c.id !== counterId);
+    this.setState({ counter });
+  };
+
+  handleIncrement = (counter) => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index] = { ...counter };
+    counters[index].value++;
+    this.setState({ counters });
+  };
+
+  render() {
+    return (
+      <div>
+        {this.state.counters.map((counter) => (
+          <Counter
+            key={counter.id}
+            onDelete={this.handleDelete}
+            onIncrement={this.handleIncrement}
+            counter={counter}
+          />
+        ))}
+      </div>
+    );
+  }
+}
+
+export default Counters;
+```
+
+[Back to top](#react)
+
+---
+
+## Multiple Components in Sync
+
+- 当两个 components 没有父子关系的时候 两个组件之间没有办法直接通过 props 传 data
+- 因此我们需要进行 lift state up 这个操作 让这两个没有父子关系的组件 有一个共同的父亲
+  - 第一步先选好两个组件的共同父亲 例如 App.jsx
+  - 第二步将 Counters 中的 state 和 handle state 相关的 methods 全都放到 App.jsx 中
+  - 第三部 在 App.jsx 中以 props 的形式 把 data 传给 Counters (注意命名要变成 onDelete， on 什么什么什么)
+  - Counters 中对于他自己的孩子 同样以 props 的形式传数据
+  - 这样就形成了一个树的结构
+- 通过树的结构实现了多个组件之间的数据状态同步 （其实就是一个父亲管理 state 剩下的所有孩子都是一级一级被控制）
+
+[Back to top](#react)
+
+---
+
+## Stateless Functional Components
+
+- I prefer use Component all the time - at your choice
+- 当一个 component 没有 state 没有 function 的时候 称为一个没有状态的功能组件
+- Instead of using Component; we can define a function instead
+
+Class component
+
+![](./images/statelessFunctionalComponents1.png)
+
+stateless Functional Components
+
+![](./images/statelessFunctionalComponents2.png)
+
+[Back to top](#react)
+
+---
+
+## Destructuring Arguments
+
+- Makes code cleaner
+- If you do not like to use too many `props.totalCount`, `props.counter`
+- 可以提取出来对应的参数
+
+```jsx
+// Before
+const NavBar = (props) => {
+  return({props.totalCounters});
+};
+
+// After
+const NavBar = ({totalCounters}) => {
+  return({totalCounters});
+};
+```
+
+[Back to top](#react)
+
+---
+
+## Lifecycle Hooks
+
+![](./images/lifeCycleHooks.png)
+
+- Mount
+  - `constructor` - remeber to call super
+  - `render` - render react element
+  - `componentDidMount` - make Ajax call or retrieve data from servers
+- Update
+  - `render` - any update will call render to render the whole components tree
+  - `componentDidUpdate(prevProps, prevState)` - 可以访问之前的props和state 判断一下如果不同 可以发送新的Ajax请求到后端要数据
