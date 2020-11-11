@@ -190,3 +190,176 @@ html5
 ---
 
 # CSS
+
+doc: [link](https://developer.mozilla.org/en-US/docs/Web/CSS)
+
+Colorhunt: [link](https://colorhunt.co/) - To find some beautiful colors
+
+## Inline CSS
+
+```html
+<body style="background-color: blue;">
+  
+</body>
+```
+
+[Back to top](#HTML)
+
+---
+
+## Internal CSS
+
+```html
+<style>
+  
+  body {
+    background-color: blue;
+  }
+  
+  hr {
+    background-color: white;
+    border-style: none;
+    border-top-style: dotted;
+    border-color: grey;
+    border-width: 5px;
+    height: 0px;
+    width: 5%;
+  }
+  
+</style>
+```
+
+[Back to top](#HTML)
+
+---
+
+## External CSS
+
+index.html
+
+```html
+<head>
+  <link rel="stylesheet" herf="css/styles.css">
+</head>
+```
+
+styles.css
+
+```css
+<style>
+  
+  body {
+    background-color: blue;
+  }
+
+  h1 {
+		color: black;
+  }
+
+	h3 {
+		color: black;
+  }
+  
+  hr {
+    background-color: white;
+    border-style: none;
+    border-top-style: dotted;
+    border-color: grey;
+    border-width: 5px;
+    height: 0px;
+    width: 5%;
+  }
+  
+</style>
+```
+
+[Back to top](#HTML)
+
+---
+
+## Debug CSS
+
+- Chrome developer tool -> Elements -> body -> Styles
+- 可以使用 checkbox in the Styles 去一个一个尝试对应的style - 不会影响code
+
+[Back to top](#HTML)
+
+---
+
+## CSS Syntax
+
+[link](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference) - find keywords
+
+`selector{property: value;}`
+
+- `selector` - hr
+- `property` - background-color - 要按照字典顺序排序
+- `value` - red
+
+[Back to top](#HTML)
+
+---
+
+## CSS Selector
+
+```html
+<img class="bacon" src="abc.png" alt="abc picture">
+```
+
+```css
+.bacon{
+	background-color: green;
+}
+```
+
+[Back to top](#HTML)
+
+---
+
+## Class vs Ids
+
+Id:
+
+```html
+<h1 id="heading">I love you</h1>
+```
+
+```css
+#heading {
+  color: blue;
+}
+```
+
+Class:
+
+```html
+<img class="bacon circular" src="abc.png" alt="abc picture">
+```
+
+```css
+.bacon{
+	background-color: green;
+}
+
+.circular{
+  border-radius: 100%;
+}
+```
+
+- Id - apply to only one element in entire html file
+  - 尽可能不要使用id
+- Class - apply same style to a group of elements
+  - 一个element 可以应用多个class
+
+pseudo-class: [link](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Pseudo-classes_and_pseudo-elements)
+
+```css
+img:hover {
+  background-color: red;
+}
+```
+
+[Back to top](#HTML)
+
+---
+
