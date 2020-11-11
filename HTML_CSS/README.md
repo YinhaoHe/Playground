@@ -195,6 +195,16 @@ doc: [link](https://developer.mozilla.org/en-US/docs/Web/CSS)
 
 Colorhunt: [link](https://colorhunt.co/) - To find some beautiful colors
 
+---
+
+## SCSS
+
+[link](https://www.ruanyifeng.com/blog/2012/06/sass.html)
+
+[Back to top](#HTML)
+
+---
+
 ## Inline CSS
 
 ```html
