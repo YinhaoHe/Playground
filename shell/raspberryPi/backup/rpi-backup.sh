@@ -5,7 +5,7 @@ if [  $# != 2 ]; then
   echo "example: $0 /dev/mmcblk0p1 /dev/mmcblk0p2"
   exit 0
 fi
-dev_boot=$1
+dev_boot=$1 
 dev_root=$2
 mounted_boot=`df -h | grep $dev_boot | awk '{print $6}'`
 mounted_root=`df -h | grep $dev_root | awk '{print $6}'`
