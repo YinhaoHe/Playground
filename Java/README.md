@@ -581,3 +581,63 @@ public class Main {
 
 ---
 
+## HashMap
+
+### merge
+
+- [Java HashMap merge() 方法](https://www.runoob.com/java/java-hashmap-merge.html)
+
+merge() 方法会先判断指定的 key 是否存在，如果不存在，则添加键值对到 hashMap 中。
+
+merge() 方法的语法为：
+
+```java
+hashmap.merge(key, value, remappingFunction)
+```
+
+**参数说明：**
+
+- key - 键
+- value - 值
+- remappingFunction - 重新映射函数，用于重新计算值
+
+如果 key 对应的 value 不存在，则返回该 value 值，如果存在，则返回通过 remappingFunction 重新计算后的值。
+
+E.G.
+
+```java
+import java.util.HashMap;
+
+class Main {
+    public static void main(String[] args) {
+        // 创建一个 HashMap
+        HashMap<String, String> countries = new HashMap<>();
+
+        // 往HashMap插入映射项
+        countries.put("Washington", "America");
+        countries.put("Canberra", "Australia");
+        countries.put("Madrid", "Spain");
+        System.out.println("HashMap: " + countries);
+
+        //合并 key为 Washington的映射
+        String returnedValue = countries.merge("Washington", "USA", (oldValue, newValue) -> oldValue + "/" + newValue);
+        System.out.println("Washington: " + returnedValue);
+
+        //输出更新后的HashMap
+        System.out.println("Updated HashMap: " + countries);
+    }
+}
+```
+
+输出结果：
+
+```java
+HashMap: {Madrid=Spain, Canberra=Australia, Washington=America}
+Washington: America/USA
+Updated HashMap: {Madrid=Spain, Canberra=Australia, Washington=America/USA},  
+```
+
+[Back to top](#Java)
+
+---
+
