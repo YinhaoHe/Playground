@@ -641,3 +641,13 @@ Updated HashMap: {Madrid=Spain, Canberra=Australia, Washington=America/USA},
 
 ---
 
+## [TreeMap](./notes/TreeMap.md)
+
+TreeMap中的元素默认按照keys的自然排序排列。
+
+（对Integer来说，其自然排序就是数字的升序；对String来说，其自然排序就是按照字母表排序）
+
+[Back to top](#Java)
+
+---
+
