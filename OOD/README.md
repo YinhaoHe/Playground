@@ -5,18 +5,18 @@
   * [Getter与Setter](#getter-setter)
   * [形状工厂](#Shape-Factory)
   * [发布订阅模式](#pub-sub)
-  * [友谊服务](#Follower followering)
+  * [友谊服务](#Follower-followering)
   * [单例](#Singleton)
   * [设计kindle OO Design](#kindle-oo-design)
-  * [自动咖啡机OOD](#coffee machine ood)
+  * [自动咖啡机OOD](#coffee-machine-ood)
   * [Google File System](#google-file-system)
-  * [银行系统设计](#Bank System Design)
+  * [银行系统设计](#Bank-System-Design)
   * [二十一点 OO Design](#21-oo-design)
   * [设计餐厅 OO Design](#restaurant-oo-design)
   * [Design tic tac toe](#design-tic-tac-toe)
   * [Design a parking lot](#design-a-parking-lot)
-  * [自动售货机 OO Design](#Vending Machine OO Design)
-  * [电梯系统 OO Design](#Elevator System OOD)
+  * [自动售货机 OO Design](#Vending-Machine-OO-Design)
+  * [电梯系统 OO Design](#Elevator-System-OOD)
 
 ## ReferenceManager
 
