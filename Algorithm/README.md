@@ -1,5 +1,7 @@
 # Greedy
 
+[Week3](./week3)
+
 - General Strategy
   - Make a greedy choice
   - **Prove** that it is a **safe move**
