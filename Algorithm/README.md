@@ -35,3 +35,10 @@ Children in one group - age should not different more than one year
 可以分割的背包问题：背包中要装入零食 尽可能放入最多value的零食 可以切割零食 因此称为可以分割的背包问题
 
 - Safe move 找到性价比(Value / Weight)最高的零食 优先放进去背包 
+
+# Divide and Conquer
+
+- Create a recursive solution
+- Define a corresponding recurrence relation T (写出递推表达式)
+- Determine T(n) worst case runtime
+- Optionally, create iterative solution
