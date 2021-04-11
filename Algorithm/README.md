@@ -42,4 +42,11 @@ Children in one group - age should not different more than one year
 - Define a corresponding recurrence relation T (写出递推表达式)
 - Determine T(n) worst case runtime
 - Optionally, create iterative solution
-- 
+
+## Binary Search
+
+O(LogN)
+
+## Polynomial Mulyiplication
+
+多项式乘法
