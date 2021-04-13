@@ -91,14 +91,10 @@ Better idea: 提出最高系数的一半 形成四个多项式 再进行运算 d
 
 - used to calc the runtime of **recurrence problems**
 
-<font color=red>
-
-1. 计算一下level 1 和 level 2 的运算量
-2. 判断是否第一层和第二层的运算量是相同的，如果是那就是 **case 2**
-3. 判断如果第一层的运算量大于第二层，那么第一层的复杂度就是dominate，所以符合 **case 1**
-4. 判断如果第二层的运算量大于第一层，那么说明运算量是一层一层增加的，因此最后一层的复杂度dominate，所以符合 **case 3** logba 就是leaves 叶子的数量
-
-</font>
+1. <font color=red>计算一下level 1 和 level 2 的运算量</font>
+2. <font color=red>判断是否第一层和第二层的运算量是相同的，如果是那就是 **case 2**</font>
+3. <font color=red>判断如果第一层的运算量大于第二层，那么第一层的复杂度就是dominate，所以符合 **case 1**</font>
+4. <font color=red>判断如果第二层的运算量大于第一层，那么说明运算量是一层一层增加的，因此最后一层的复杂度dominate，所以符合 **case 3** logba 就是leaves 叶子的数量</font>
 
 ![](./images/masterTheorem.png)
 
