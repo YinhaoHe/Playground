@@ -42,6 +42,8 @@ Children in one group - age should not different more than one year
 
 - Safe move 找到性价比(Value / Weight)最高的零食 优先放进去背包 
 
+[Back to top](#Algorithm)
+
 ---
 
 # Divide and Conquer
@@ -51,11 +53,15 @@ Children in one group - age should not different more than one year
 - Determine T(n) worst case runtime
 - Optionally, create iterative solution
 
+[Back to top](#Algorithm)
+
 ---
 
 ## Binary Search
 
 O(LogN)
+
+[Back to top](#Algorithm)
 
 ---
 
@@ -77,13 +83,50 @@ Better idea: 提出最高系数的一半 形成四个多项式 再进行运算 d
 
 ![](./images/karatsubaExample.png)
 
+[Back to top](#Algorithm)
+
 ---
 
 ## Master Theorem
 
 - used to calc the runtime of **recurrence problems**
 
+<font color=red>
+
+1. 计算一下level 1 和 level 2 的运算量
+2. 判断是否第一层和第二层的运算量是相同的，如果是那就是 **case 2**
+3. 判断如果第一层的运算量大于第二层，那么第一层的复杂度就是dominate，所以符合 **case 1**
+4. 判断如果第二层的运算量大于第一层，那么说明运算量是一层一层增加的，因此最后一层的复杂度dominate，所以符合 **case 3** logba 就是leaves 叶子的数量
+
+</font>
+
 ![](./images/masterTheorem.png)
+
+> When I have a recurrence of this rough form, I look at the amount of work 
+>
+> done at the first level and at the second level (which is a very easy calculation) and 
+>
+> then I just say to myself Is that the same amount of work? 
+>
+> If it's the same amount of work it's going to be the same amount of work 
+>
+> all the way down and so we're going to be in case two. 
+>
+> So it's going to be the amount of work at the first level, 
+>
+> which we known is O(n to the d), times log n because there are that many levels. 
+>
+> On the other hand, if the first term is larger than the second term 
+>
+> I know the first term is going to dwarf all the other terms. 
+>
+> And so, we're left with just O(n to the d). 
+>
+> And finally, if the first term is less than the second term, 
+>
+> I know they're going to keep increasing and it's the bottom term that I need.
+
+[Back to top](#Algorithm)
 
 ---
 
