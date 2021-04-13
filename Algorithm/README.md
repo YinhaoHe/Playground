@@ -1,8 +1,10 @@
+# Algorithm
+
 # Greedy
 
 [Week3](./week3)
 
-- General Strategy
+- **General Strategy**
   - Make a greedy choice
   - **Prove** that it is a **safe move**
   - Reduce to a **subproblem**
@@ -18,23 +20,29 @@
   - Not all first moves are safe
   - Often greedy moves are not safe
 
-## Question
+[Back to top](#Algorithm)
 
-### Refuel car with least gas stations
+---
+
+### Question
+
+#### Refuel car with least gas stations
 
 - Safe move 选择最远能到达的gas station
 
-### Group children 
+#### Group children 
 
 Children in one group - age should not different more than one year
 
 - Safe move 把孩子的年龄变成坐标点 从最左边点开始取一个长度为1的线段 依次找到需要几根线段
 
-### Long hike Fractional Knapsack
+#### Long hike Fractional Knapsack
 
 可以分割的背包问题：背包中要装入零食 尽可能放入最多value的零食 可以切割零食 因此称为可以分割的背包问题
 
 - Safe move 找到性价比(Value / Weight)最高的零食 优先放进去背包 
+
+---
 
 # Divide and Conquer
 
@@ -43,10 +51,39 @@ Children in one group - age should not different more than one year
 - Determine T(n) worst case runtime
 - Optionally, create iterative solution
 
+---
+
 ## Binary Search
 
 O(LogN)
 
+---
+
 ## Polynomial Mulyiplication
 
 多项式乘法
+
+Naive idea: Brutual force - O(n)
+
+Better idea: 提出最高系数的一半 形成四个多项式 再进行运算 divide and conquer - 但是依旧是 O(n)
+
+![](./images/naiveDivideConquerPolyMutiple.png)
+
+- Karatsuba approach
+
+![](./images/karatsuba.png)
+
+- Karatsuba approach example
+
+![](./images/karatsubaExample.png)
+
+---
+
+## Master Theorem
+
+- used to calc the runtime of **recurrence problems**
+
+![](./images/masterTheorem.png)
+
+---
+
