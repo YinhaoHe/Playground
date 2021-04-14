@@ -116,9 +116,11 @@ Better idea: 提出最高系数的一半 形成四个多项式 再进行运算 d
 
 ---
 
-## Sorting
+## Sorting Algos
 
-### Selection sorting
+> For any comparison based sorting algorithm. there exists an array A[1 ... n] such that the algorithm performs at least Ω(nlogn) comparision to sort A.
+
+### Selection sort
 
 Insertion sort, bubble sort, selection sort --- O(n<sup>2</sup>)
 
@@ -131,3 +133,37 @@ Insertion sort, bubble sort, selection sort --- O(n<sup>2</sup>)
 > Sorts in place: requires a constant amount of memory
 
 Insertion sort/bubble sort algorithm are O(n<sup>2</sup>) too.
+
+[Back to top](#Algorithm)
+
+---
+
+### Merge sort
+
+> O(nlogn)
+
+![](./images/mergeSort.png)
+
+![](./images/mergeFunction.png)
+
+![](./images/mergeSortExample.png)
+
+[Back to top](#Algorithm)
+
+---
+
+### Counting sort
+
+> Non comparison sorting 
+>
+> Only for small integers 因为需要使用到额外的数组空间 如果排序的东西太大就不能实现了
+
+- Provided that all elements of A[1 ... n] are integers from 1 to M, CountSort(A) sorts A in time O(n+M).
+- if M = O(n), then the running time is O(n).
+
+![](./images/countingSort.png)
+
+[Back to top](#Algorithm)
+
+---
+
