@@ -116,3 +116,18 @@ Better idea: 提出最高系数的一半 形成四个多项式 再进行运算 d
 
 ---
 
+## Sorting
+
+### Selection sorting
+
+Insertion sort, bubble sort, selection sort --- O(n<sup>2</sup>)
+
+- Find a minimum by scanning the array
+- Swap it with the first element
+- Repeat with the remaining part of the array
+
+>  O(n<sup>2</sup>)
+>
+> Sorts in place: requires a constant amount of memory
+
+Insertion sort/bubble sort algorithm are O(n<sup>2</sup>) too.
