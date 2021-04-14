@@ -157,11 +157,82 @@ Insertion sort/bubble sort algorithm are O(n<sup>2</sup>) too.
 > Non comparison sorting 
 >
 > Only for small integers 因为需要使用到额外的数组空间 如果排序的东西太大就不能实现了
+>
+> 并且只能是 integers 任何小数都不行因为无法表示 index
 
 - Provided that all elements of A[1 ... n] are integers from 1 to M, CountSort(A) sorts A in time O(n+M).
 - if M = O(n), then the running time is O(n).
 
 ![](./images/countingSort.png)
+
+[Back to top](#Algorithm)
+
+---
+
+### Quick sort
+
+>Quick sort is a comparision based algorithm
+>
+>Running time: **O(nlogn)** on average, O(n<sup>2</sup>) in the worst case
+>
+>**Efficient in practice**
+
+![](./images/quickSort.png)
+
+![](./images/quickSortExample.png)
+
+![](./images/quickSortPivot.png)
+
+1. **How to pick Pivot for Quick sort** (随机选择pivot就是答案)
+
+>Assume that all the elements of A[1 ... n] are pairwise different. Then the average running time of RandomizedQuickSort(A) is O(nlogn) while the worst case running time is O(n<sup>2</sup>).
+>
+>
+>
+>Averaging is over random numbers used the algorithm, but not over the inputs.
+
+如果每一个选择的pivot都是平衡的 那么两个subarray长度相对平衡 整个递归树的层数大概是log层的 每一层都是O(n)的工作量 因此最终是**O(nlogn)**
+
+如果每一个选择的pivot都是unbalanced的 那么两个subarray长度都非常的不平衡 整个递归树最大层数大概就是n层 并且每一层还是O(n)的工作量 因此最终的复杂度是 **O(n<sup>2</sup>)**
+
+- **random pick pivot**
+
+为了尽可能的选择让subarray balance 的pivot 我们完全随机的选择pivot 这样就能保证50%的机会找到balance subarray which is actually very **fast**
+
+![](./images/randomPivot.png)
+
+![](./images/whyRandom.png)
+
+2. **How to deal with Equal elements in Quick sort** (three way partition is the answer)
+
+试想如果一个array中的所有数字都相等 意味着这个array已经排序好了 然而quick sort每一次仍旧要选择一个pivot然后将剩下的元素全部分配到pivot的两侧 由于所有elements are euqal 所以会产生一侧是0个元素 另外一侧是n-1个元素的情况 这样就符合了我们之前讨论的关于unbalanced的subarray会出现的问题 也就是时间复杂度为**O(n<sup>2</sup>)**.
+
+In order to解决这个问题 我们就引入了three way partition --- 即选出两个pivots and partition
+
+```java
+(m1, m2) <- Partition3(A, l, r);
+
+such that
+  for all l <= k <= m1 - 1, A[k] < x;
+	for all m1 <= k <= m2, A[k] = x;
+	for all m2 + 1 <= k <= r, A[k] > x;
+```
+
+![](./images/3wayPartition.png)
+
+![](./images/3wayQuickSort.png)
+
+3. **How to make sure QuickSort works in O(nlogn) time in the worst case**
+
+- To eleminate **Tail Recursive Call**
+
+![](./images/tailRecusiveCall.png)
+
+- Use **Intro Sort**
+  - 每次选择pivot的时候拿出array的first last middle elements 比较 选择median作为pivot --- **不是总好用**
+  - 另一种方法是每次recursive call记录递归的层数 一旦超过logN层 立刻切换到另外一种sorting algo --- **听着牛逼感觉也没啥用**
+
+![](./images/quickSortBounded.png)
 
 [Back to top](#Algorithm)
 
