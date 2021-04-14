@@ -226,6 +226,8 @@ such that
 
 - To eleminate **Tail Recursive Call**
 
+<font color=red>用来确保additional space 是logN 相当于省去了一半的recursive call</font>
+
 ![](./images/tailRecusiveCall.png)
 
 - Use **Intro Sort**
@@ -233,6 +235,10 @@ such that
   - 另一种方法是每次recursive call记录递归的层数 一旦超过logN层 立刻切换到另外一种sorting algo --- **听着牛逼感觉也没啥用**
 
 ![](./images/quickSortBounded.png)
+
+4. What is the amount of additional memory that regular Quick Sort uses (besides the array being sorted) in the worst case?
+
+In the worst case, the array is always divided into a part of size 11 and a part with all the other elements, and the recursion depth in this case will be O(n). **<font color =red>Recursion needs O(1)additional memory for each call</font>**, so in the worst case Quick Sort will use O(n) additional memory. However, **<font color=red>by using tail recursion elimination we can make Quick Sort use no more than O*(log*n) additional memory</font>**.
 
 [Back to top](#Algorithm)
 
