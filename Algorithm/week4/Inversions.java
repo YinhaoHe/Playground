@@ -10,6 +10,9 @@ public class Inversions {
             return numberOfInversions;
         }
         mergeSort(a, b, left, right);
+        for (int num : b) {
+            System.out.print(num + " ");
+        }
 
         return numberOfInversions;
     }
@@ -21,9 +24,6 @@ public class Inversions {
             mergeSort(arr, b, mid + 1, high);
             merge(arr, b, low, mid, high);
         }
-        for (int num : b) {
-            System.out.println(num + " ");
-        }
     }
 
     private static void merge(int arr[], int[] b, int low, int mid, int high) {
@@ -32,6 +32,17 @@ public class Inversions {
         int j = mid + 1;
         int k = 0;
 
+        while (i <= mid) {
+            for (j = mid + 1; j <= high; ++j) {
+                if (arr[i] > arr[j])
+                    ++numberOfInversions;
+            }
+            ++i;
+        }
+
+        i = low;
+        j = mid + 1;
+
         while (i <= mid && j <= high) {
             if (arr[i] <= arr[j]) {
                 temp[k] = arr[i];
@@ -39,7 +50,6 @@ public class Inversions {
             } else {
                 temp[k] = arr[j];
                 ++j;
-                ++numberOfInversions;
             }
             ++k;
         }
@@ -61,6 +71,6 @@ public class Inversions {
             a[i] = scanner.nextInt();
         }
         int[] b = new int[n];
-        System.out.println(getNumberOfInversions(a, b, 0, a.length));
+        System.out.println(getNumberOfInversions(a, b, 0, a.length - 1));
     }
 }

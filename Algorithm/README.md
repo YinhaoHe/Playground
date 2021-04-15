@@ -2,7 +2,7 @@
 
 # Greedy
 
-[Week3](./week3)
+[Code](./week3)
 
 - **General Strategy**
   - Make a greedy choice
@@ -47,6 +47,8 @@ Children in one group - age should not different more than one year
 ---
 
 # Divide and Conquer
+
+[Code](./week4)
 
 - Create a recursive solution
 - Define a corresponding recurrence relation T (写出递推表达式)
@@ -148,6 +150,60 @@ Insertion sort/bubble sort algorithm are O(n<sup>2</sup>) too.
 
 ![](./images/mergeSortExample.png)
 
+```java
+public class Sort {
+
+    public static void MergeSort(int[] arr, int low, int high)
+    {
+        //使用递归的方式进行归并排序，所需要的空间复杂度是O（N+logN）
+        int mid = (low + high)/2;
+        if(low < high)
+        {
+            //递归地对左右两边进行排序
+            MergeSort(arr, low, mid);
+            MergeSort(arr, mid+1, high);
+            //合并
+            merge(arr, low, mid, high);
+        }
+    }
+    
+    //merge函数实际上是将两个有序数组合并成一个有序数组
+    //因为数组有序，合并很简单，只要维护几个指针就可以了
+    private static void merge(int[] arr, int low, int mid, int high)
+    {
+        //temp数组用于暂存合并的结果
+        int[] temp = new int[high - low + 1];
+        //左半边的指针
+        int i = low;
+        //右半边的指针
+        int j = mid+1;
+        //合并后数组的指针
+        int k = 0;
+        
+        //将记录由小到大地放进temp数组
+        for(; i <= mid && j <= high; k++)
+        {
+            if(arr[i] < arr[j])
+                temp[k] = arr[i++];
+            else
+                temp[k] = arr[j++];
+        }
+        
+        //接下来两个while循环是为了将剩余的（比另一边多出来的个数）放到temp数组中
+        while(i <= mid)
+            temp[k++] = arr[i++];
+        
+        while(j <= high)
+            temp[k++] = arr[j++];
+        
+        //将temp数组中的元素写入到待排数组中
+        for(int l = 0; l < temp.length; l++)
+            arr[low + l] = temp[l];
+    }
+    
+}
+```
+
 [Back to top](#Algorithm)
 
 ---
@@ -240,7 +296,44 @@ such that
 
 In the worst case, the array is always divided into a part of size 11 and a part with all the other elements, and the recursion depth in this case will be O(n). **<font color =red>Recursion needs O(1)additional memory for each call</font>**, so in the worst case Quick Sort will use O(n) additional memory. However, **<font color=red>by using tail recursion elimination we can make Quick Sort use no more than O*(log*n) additional memory</font>**.
 
+```java
+private static int partition2(int[] a, int l, int r) {
+        int x = a[l];
+        int j = l;
+        for (int i = l + 1; i <= r; i++) {
+            if (a[i] <= x) {
+                j++;
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
+        }
+        int t = a[l];
+        a[l] = a[j];
+        a[j] = t;
+        return j;
+    }
+
+    private static void randomizedQuickSort(int[] a, int l, int r) {
+        if (l >= r) {
+            return;
+        }
+        int k = random.nextInt(r - l + 1) + l;
+        int t = a[l];
+        a[l] = a[k];
+        a[k] = t;
+        //use partition3
+        int m = partition2(a, l, r);
+        randomizedQuickSort(a, l, m - 1);
+        randomizedQuickSort(a, m + 1, r);
+    }
+```
+
 [Back to top](#Algorithm)
 
 ---
+
+# Dynamic Programming
+
+[Code](./week5)
 

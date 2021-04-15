@@ -2,19 +2,37 @@ import java.util.*;
 import java.io.*;
 
 public class MajorityElement {
+
     private static int getMajorityElement(int[] a, int left, int right) {
+        int majorElement = getMajorityElementHelper(a, left, right);
+        int count = count(a, majorElement, left, right);
+        return (a.length / 2) < count ? 1 : 0;
+    }
+
+    private static int getMajorityElementHelper(int[] a, int left, int right) {
+
+        // write your code here
         if (left == right) {
-            return -1;
-        }
-        if (left + 1 == right) {
             return a[left];
         }
-        //write your code here
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            if (a[i] == )
+        int mid = left + (right - left) / 2;
+        int leftMajor = getMajorityElementHelper(a, left, mid);
+        int rightMajor = getMajorityElementHelper(a, mid + 1, right);
+        if (leftMajor == rightMajor)
+            return leftMajor;
+        int leftCount = count(a, leftMajor, left, right);
+        int rightCount = count(a, rightMajor, left, right);
+
+        return leftCount > rightCount ? leftMajor : rightMajor;
+    }
+
+    private static int count(int[] a, int num, int left, int right) {
+        int count = 0;
+        for (int i = left; i <= right; ++i) {
+            if (a[i] == num)
+                count++;
         }
-        return -1;
+        return count;
     }
 
     public static void main(String[] args) {
@@ -24,11 +42,7 @@ public class MajorityElement {
         for (int i = 0; i < n; i++) {
             a[i] = scanner.nextInt();
         }
-        if (getMajorityElement(a, 0, a.length) != -1) {
-            System.out.println(1);
-        } else {
-            System.out.println(0);
-        }
+        System.out.println(getMajorityElement(a, 0, a.length - 1));
     }
 
     static class FastScanner {

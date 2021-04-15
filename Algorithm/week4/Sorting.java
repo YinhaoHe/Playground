@@ -1,30 +1,47 @@
 import java.io.*;
 import java.util.*;
 
-public class BinarySearch {
+public class Sorting {
+    private static Random random = new Random();
 
-    static int binarySearch(int[] a, int x) {
-        int left = 0, right = a.length;
+    private static int[] partition3(int[] a, int l, int r) {
         // write your code here
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (a[mid] == x)
-                return mid;
-            if (a[mid] < x) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        return -1;
+
+        int m1 = l;
+        int m2 = r;
+        int[] m = { m1, m2 };
+        return m;
     }
 
-    static int linearSearch(int[] a, int x) {
-        for (int i = 0; i < a.length; i++) {
-            if (a[i] == x)
-                return i;
+    private static int partition2(int[] a, int l, int r) {
+        int x = a[l];
+        int j = l;
+        for (int i = l + 1; i <= r; i++) {
+            if (a[i] <= x) {
+                j++;
+                int t = a[i];
+                a[i] = a[j];
+                a[j] = t;
+            }
         }
-        return -1;
+        int t = a[l];
+        a[l] = a[j];
+        a[j] = t;
+        return j;
+    }
+
+    private static void randomizedQuickSort(int[] a, int l, int r) {
+        if (l >= r) {
+            return;
+        }
+        int k = random.nextInt(r - l + 1) + l;
+        int t = a[l];
+        a[l] = a[k];
+        a[k] = t;
+        // use partition3
+        int m = partition2(a, l, r);
+        randomizedQuickSort(a, l, m - 1);
+        randomizedQuickSort(a, m + 1, r);
     }
 
     public static void main(String[] args) {
@@ -34,14 +51,9 @@ public class BinarySearch {
         for (int i = 0; i < n; i++) {
             a[i] = scanner.nextInt();
         }
-        int m = scanner.nextInt();
-        int[] b = new int[m];
-        for (int i = 0; i < m; i++) {
-            b[i] = scanner.nextInt();
-        }
-        for (int i = 0; i < m; i++) {
-            // replace with the call to binarySearch when implemented
-            System.out.print(binarySearch(a, b[i]) + " ");
+        randomizedQuickSort(a, 0, n - 1);
+        for (int i = 0; i < n; i++) {
+            System.out.print(a[i] + " ");
         }
     }
 
