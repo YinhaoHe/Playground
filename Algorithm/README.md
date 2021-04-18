@@ -24,19 +24,19 @@
 
 ---
 
-### Question
+## Question
 
-#### Refuel car with least gas stations
+### Refuel car with least gas stations
 
 - Safe move 选择最远能到达的gas station
 
-#### Group children 
+### Group children 
 
 Children in one group - age should not different more than one year
 
 - Safe move 把孩子的年龄变成坐标点 从最左边点开始取一个长度为1的线段 依次找到需要几根线段
 
-#### Long hike Fractional Knapsack
+### Long hike Fractional Knapsack
 
 可以分割的背包问题：背包中要装入零食 尽可能放入最多value的零食 可以切割零食 因此称为可以分割的背包问题
 
@@ -335,5 +335,15 @@ private static int partition2(int[] a, int l, int r) {
 
 # Dynamic Programming
 
-[Code](./week5)
+[Code1](./week5)
+
+[Code2](./week6)
+
+## Change Problem
+
+[Visualize link](https://www.cs.usfca.edu/~galles/visualization/DPChange.html)
+
+Greedy 不一定总是OPT的 用DP可以一直找到最优解 
+
+![](./images/dpChange.png)
 
