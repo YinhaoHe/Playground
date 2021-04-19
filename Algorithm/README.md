@@ -343,7 +343,7 @@ private static int partition2(int[] a, int l, int r) {
 
 [Visualize link](https://www.cs.usfca.edu/~galles/visualization/DPChange.html)
 
-Greedy 不一定总是OPT的 用DP可以一直找到最优解 
+Greedy 不一定总是OPT的 用DP可以一直找到最优解
 
 ![](./images/dpChange.png)
 
