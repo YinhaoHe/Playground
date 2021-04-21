@@ -347,3 +347,13 @@ Greedy 不一定总是OPT的 用DP可以一直找到最优解
 
 ![](./images/dpChange.png)
 
+## Alignment Game
+
+![](./images/alignmentGame.png)
+
+![](./images/alignmentExample.png)
+
+![](./images/alignmentScore.png)
+
+![](./images/commonSub.png)
+
