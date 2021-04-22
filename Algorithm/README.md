@@ -357,3 +357,27 @@ Greedy 不一定总是OPT的 用DP可以一直找到最优解
 
 ![](./images/commonSub.png)
 
+## Longest common subsequence
+
+Maximizing the length of common subsequence corresponds to maximizing the score of an alignment with mu = sigma = 0;
+
+![](./images/longestSub.png)
+
+## Edit distance
+
+找到把一个字符串变成另一个字符串所需要的最少的操作数（操作：替换插入删除）
+
+![](./images/editDist.png)
+
+>Minimizing edit distance = maximizing alignment score
+
+![](./images/alignmentEditDist.png)
+
+![](./images/editDistDP.png)
+
+![](./images/editDistDPMatrix.png)
+
+How to find OPT alignment?
+
+![](./images/optAlignment.png)
+
