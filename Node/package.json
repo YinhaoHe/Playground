@@ -25,7 +25,7 @@
     "express": "^4.17.1",
     "mongoose": "^5.9.27",
     "nodemon": "^2.0.4",
-    "underscore": "^1.10.2"
+    "underscore": "^1.12.1"
   },
   "devDependencies": {
     "jshint": "^2.12.0"
