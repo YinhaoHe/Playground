@@ -48,6 +48,27 @@ Firebase 成型的后端服务 google 注册账号就能直接使用
 
 Recap of some highly used JS in React
 
+### var let const
+
+Always use `let` over `var` 
+
+- `var` -> function 一个function内部都可见 例如i在for loop之外还可见
+- `let` -> code block 作用域
+- `const` -> code block 作用域
+
+[Back to top](#react)
+
+---
+
+### Access Objects
+
+- `obj.name = 'a'`
+- `obj['name'] = 'a'` 
+
+[Back to top](#react)
+
+---
+
 ### Binding this and arrow function
 
 ```js
@@ -69,8 +90,12 @@ walk();
 ```
 
 - 对于独立的函数调用 **用到 callback 函数 都要记住 always use arrow function!!!!!!!!**
+- Arrow functions don't rebind this keyword.
 
 ```js
+// 箭头函数
+const square = number => number * number;
+
 const person = {
   name: "Yinhao",
   setTimeout(() => {
@@ -115,10 +140,80 @@ const { street: st } = address;
 
 ---
 
+### Spread Operator
+
+既可以用来clone/连接两个数组 也可用来clone/连接两个Obj
+
+```js
+const first = [1, 2, 3];
+const second = [4, 5, 6];
+
+// const combined = first.concat(second);
+const combined = [...first, 'a', ...second, 'b'];
+const clone = [...first];
+
+const first = { name : "Name" };
+const second = { job : "Job" };
+
+const combined = { ...first, ...second, location: "US" };
+```
+
+[Back to top](#react)
+
+---
+
+### Class Inheritance
+
+```js
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+  
+  walk() {
+    console.log("walk");
+  }
+}
+
+const person = new Person("Name");
+
+class Teacher extends Person {
+  constructor(name, degree) {
+    super(name);
+    this.degree = degree;
+  }
+  
+  teach() {
+    console.log("teach");
+  }
+}
+
+const teacher = new Teacher("Teacher", "MSC");
+```
+
+[Back to top](#react)
+
+---
+
 ### 2 kinds of exports: Named Exports and Default Exports
 
-- Default -> import ... from '';
-- Named -> import { ... } from '';
+```js
+import { Person } from './person';
+
+export class Teacher extends Person {
+  constructor(name, degree) {
+    super(name);
+    this.degree = degree;
+  }
+  
+  teach() {
+    console.log("teach");
+  }
+}
+```
+
+- Default -> import ... from ''; / export default ... 
+- Named -> import { ... } from ''; / export ...
 
 e.g. import React, { Component } from 'react';
 
@@ -151,6 +246,15 @@ class Counter extends Component {
 export default Counter;
 
 ```
+
+[Back to top](#react)
+
+---
+
+## Setting Attributes Embedded Expressions
+
+- 使用{}在里面写js code 实现动态操作className sytle等等
+- `<img src={this.state.imageUrl} alt="" />`
 
 [Back to top](#react)
 
