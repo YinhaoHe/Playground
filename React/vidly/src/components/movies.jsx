@@ -25,6 +25,7 @@ class Movies extends Component {
               <th>Genre</th>
               <th>Stock</th>
               <th>Rate</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
