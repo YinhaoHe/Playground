@@ -465,7 +465,7 @@ return (
 
 ---
 
-## Composing Components
+# Composing Components
 
 - Combine multiple components together to be one component
 - Counters 里面可以 render 很多个不同的 counter 每个 counter 都有自己的 state
@@ -613,7 +613,7 @@ render() {
             ))}
     ```
 
-  - key 只能 react 内部访问 所以不算是 props 的一部分
+  - **key** 只能 react 内部用来unique id an element 所以不算是 props 的一部分
 
 - State:
 
@@ -626,6 +626,8 @@ render() {
 ---
 
 ## Raise and Handle events
+
+### The component that owns a piece of the state, should be the one modifying it
 
 - React 中如果想要修改一个 component 的 state 必须要在这个 component 里面去进行修改或删除
 - 因此当我们想在另外一个组件中修改这个组件的 state 时，需要用到 raise and handle events
