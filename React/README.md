@@ -467,6 +467,11 @@ return (
 
 # Composing Components
 
+**Code:**
+
+- **[counters.jsx](./counter-app/src/components/counters.jsx)**
+- **[counter.jsx](./counter-app/src/components/counter.jsx)**
+
 - Combine multiple components together to be one component
 - Counters 里面可以 render 很多个不同的 counter 每个 counter 都有自己的 state
 
@@ -497,6 +502,11 @@ export default Counters;
 ---
 
 ## Passing data to components
+
+**Code:**
+
+- **[counters.jsx](./counter-app/src/components/counters.jsx)**
+- **[counter.jsx**](./counter-app/src/components/counter.jsx)
 
 - 在 counters 里面给每一个 counter 初始化
 
@@ -547,6 +557,11 @@ class Counter extends Component {
 
 ## Passing Children
 
+**Code:**
+
+- **[counters.jsx](./counter-app/src/components/counters.jsx)**
+- **[counter.jsx**](./counter-app/src/components/counter.jsx)
+
 - **When we want to return something between an opening and closing tags in an element**
 - 如果想要 render anything in close tags; 可以使用 children
 - `this.props.children`
@@ -595,6 +610,11 @@ render() {
 
 ## Props vs State
 
+**Code:**
+
+- **[counters.jsx](./counter-app/src/components/counters.jsx)**
+- **[counter.jsx**](./counter-app/src/components/counter.jsx)
+
 - Props :
 
   - Data that is given to a component;
@@ -626,6 +646,11 @@ render() {
 ---
 
 ## Raise and Handle events
+
+**Code:**
+
+- **[counters.jsx](./counter-app/src/components/counters.jsx)**
+- **[counter.jsx**](./counter-app/src/components/counter.jsx)
 
 ### The component that owns a piece of the state, should be the one modifying it
 
@@ -679,6 +704,15 @@ handle - handleDelete() - 父亲 handle
 ---
 
 ## Remove local State aka controlled components
+
+**Code:**
+
+- **[counters.jsx](./counter-app/src/components/counters.jsx)**
+- **[counter.jsx**](./counter-app/src/components/counter.jsx)
+
+### To Guarantee Single Source of Truth
+
+> A controlled component does not have state. It get all data from its parent. 这保证了数据来源的唯一，从而使每一个组件在获得数据的时候统一，不产生每个组件的local state不更新的情况 确保了single source of truth
 
 - Between different components, it is better to let one component control the other one;
 - It means the controlled component does not have state
@@ -777,6 +811,10 @@ class Counters extends Component {
 
 export default Counters;
 ```
+
+### Never ever modify state object directly
+
+一定要clone对应的obj到一个新的地址 再modify这个obj 最后setState
 
 [Back to top](#react)
 
