@@ -262,6 +262,14 @@ export default Counter;
 
 ## Rendering List Dynamically Conditionally
 
+**Code:**
+
+- **[counterConditionalRender.jsx](./counter-app/src/components/counterConditionalRender.jsx)**
+- **[counterRenderList.jsx](./counter-app/src/components/counterRenderList.jsx)**
+
+- **[counters.jsx](./counter-app/src/components/counters.jsx)**
+- **[counter.jsx](./counter-app/src/components/counter.jsx)**
+
 - To use **map** function, we need to give each element a unique key so React can quickly find which DOM needs to be changed and sync with the virtual DOM.
 
 ```jsx
@@ -506,7 +514,7 @@ export default Counters;
 **Code:**
 
 - **[counters.jsx](./counter-app/src/components/counters.jsx)**
-- **[counter.jsx**](./counter-app/src/components/counter.jsx)
+- **[counter.jsx](./counter-app/src/components/counter.jsx)**
 
 - 在 counters 里面给每一个 counter 初始化
 
@@ -560,7 +568,7 @@ class Counter extends Component {
 **Code:**
 
 - **[counters.jsx](./counter-app/src/components/counters.jsx)**
-- **[counter.jsx**](./counter-app/src/components/counter.jsx)
+- **[counter.jsx](./counter-app/src/components/counter.jsx)**
 
 - **When we want to return something between an opening and closing tags in an element**
 - 如果想要 render anything in close tags; 可以使用 children
@@ -650,7 +658,7 @@ render() {
 **Code:**
 
 - **[counters.jsx](./counter-app/src/components/counters.jsx)**
-- **[counter.jsx**](./counter-app/src/components/counter.jsx)
+- **[counter.jsx](./counter-app/src/components/counter.jsx)**
 
 ### The component that owns a piece of the state, should be the one modifying it
 
@@ -708,7 +716,7 @@ handle - handleDelete() - 父亲 handle
 **Code:**
 
 - **[counters.jsx](./counter-app/src/components/counters.jsx)**
-- **[counter.jsx**](./counter-app/src/components/counter.jsx)
+- **[counter.jsx](./counter-app/src/components/counter.jsx)**
 
 ### To Guarantee Single Source of Truth
 
@@ -822,6 +830,24 @@ export default Counters;
 
 ## Multiple Components in Sync
 
+**Code before Lifting the State:**
+
+- **[counters.jsx](./counter-app/src/components/beforeLiftingState/counters.jsx)**
+- **[counter.jsx](./counter-app/src/components/beforeLiftingState/counter.jsx)**
+- **[App.js](./counter-app/src/components/beforeLiftingState/App.js)**
+- **[index.js](./counter-app/src/components/beforeLiftingState/index.js)**
+- **[narbar.jsx](./counter-app/src/components/beforeLiftingState/navbar.jsx)**
+
+### Lifting the State Up
+
+**Code after Lifting the State:**
+
+- **[counters.jsx](./counter-app/src/components/counters.jsx)**
+- **[counter.jsx](./counter-app/src/components/counter.jsx)**
+- **[App.js](./counter-app/src/App.js)**
+- **[index.js](./counter-app/src/index.js)**
+- **[narbar.jsx](./counter-app/src/components/navbar.jsx)**
+
 - 当两个 components 没有父子关系的时候 两个组件之间没有办法直接通过 props 传 data
 - 因此我们需要进行 lift state up 这个操作 让这两个没有父子关系的组件 有一个共同的父亲
   - 第一步先选好两个组件的共同父亲 例如 App.jsx
@@ -836,6 +862,8 @@ export default Counters;
 ---
 
 ## Stateless Functional Components
+
+> JUST STICK TO CLASS
 
 - I prefer use Component all the time - at your choice
 - 当一个 component 没有 state 没有 function 的时候 称为一个没有状态的功能组件
@@ -858,6 +886,10 @@ stateless Functional Components
 - Makes code cleaner
 - If you do not like to use too many `props.totalCount`, `props.counter`
 - 可以提取出来对应的参数
+
+```js
+const { onReset, counters, onDelete, onIncrement } = this.props;
+```
 
 ```jsx
 // Before

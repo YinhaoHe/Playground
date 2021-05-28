@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import NavBar from "./components/navbar";
-import Counters from "./components/counters";
-import "./App.css";
+import Counter from "./counter";
 
-class App extends Component {
+class Counters extends Component {
   state = {
     counters: [
       { id: 1, value: 0 },
@@ -33,23 +31,27 @@ class App extends Component {
     counters[index].value++;
     this.setState({ counters });
   };
+
   render() {
     return (
-      <React.Fragment>
-        <NavBar
-          totalCounters={this.state.counters.filter((c) => c.value > 0).length}
-        />
-        <main className="container">
-          <Counters
-            counters={this.state.counters}
-            onReset={this.handleReset}
-            onIncrement={this.handleIncrement}
+      <div>
+        <button
+          onClick={this.handleReset}
+          className="btn btn-primary btn-sm m-2"
+        >
+          Reset
+        </button>
+        {this.state.counters.map((counter) => (
+          <Counter
+            key={counter.id}
             onDelete={this.handleDelete}
+            onIncrement={this.handleIncrement}
+            counter={counter}
           />
-        </main>
-      </React.Fragment>
+        ))}
+      </div>
     );
   }
 }
 
-export default App;
+export default Counters;
