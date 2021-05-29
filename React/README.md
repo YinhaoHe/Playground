@@ -913,24 +913,54 @@ const NavBar = ({totalCounters}) => {
 
 - Mount
   - `constructor` - remeber to call super
+  
   - `render` - render react element
-  - `componentDidMount` - make Ajax call or retrieve data from servers
+  
+  - `componentDidMount` - **make Ajax call or retrieve data from servers** 在render之后被call
+  
+  - ```js
+    componentDidMount() {
+      // Ajax Call
+      this.setState({...})
+    }
+    ```
 - Update
   - `render` - any update will call render to render the whole components tree
-  - `componentDidUpdate(prevProps, prevState)` - 可以访问之前的props和state 判断一下如果不同 可以发送新的Ajax请求到后端要数据
+  
+  - `componentDidUpdate(prevProps, prevState)` - 可以访问之前的props和state 判断一下如果不同 可以发送新的Ajax请求到后端要数据 **在state或者props被更新后 被call**
+  
+  - ```js
+    componentDidUpdate(prevProps, prevState) {
+      console.log("prevProps", prevProps);
+      console.log("prevState", prevState);
+      if (prevProps.counter.value !== this.props.counter.value) {
+          // Ajax call to the server to get new data
+      }
+    }
+    ```
 - Unmount
   - `componentWillUnmount()` - when delete a component; entire tree will be re-rendered. 
+
+## Practice
+
+- Counter-app
+  - **[counters.jsx](./counter-app/src/components/counters.jsx)**
+  - **[counter.jsx](./counter-app/src/components/counter.jsx)**
+  - **[App.js](./counter-app/src/App.js)**
+  - **[index.js](./counter-app/src/index.js)**
+  - **[narbar.jsx](./counter-app/src/components/navbar.jsx)**
+- 
 
 [Back to top](#react)
 
 ---
 
-## React Hooks
+# React Hooks
 
 A.K.A **functional component** - **also stateful** 
 
 - 出现hook的概念因为 class 很麻烦不适合新的开发者
-- deal with this keyword can be hard
+- deal with **`this`** keyword can be hard
 - boilerplate code needed to create a class
 
 Example:
