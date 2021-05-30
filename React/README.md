@@ -941,15 +941,39 @@ const NavBar = ({totalCounters}) => {
 - Unmount
   - `componentWillUnmount()` - when delete a component; entire tree will be re-rendered. 
 
+[Back to top](#react)
+
+---
+
 ## Practice
 
 - Counter-app
+
   - **[counters.jsx](./counter-app/src/components/counters.jsx)**
   - **[counter.jsx](./counter-app/src/components/counter.jsx)**
   - **[App.js](./counter-app/src/App.js)**
   - **[index.js](./counter-app/src/index.js)**
   - **[narbar.jsx](./counter-app/src/components/navbar.jsx)**
-- 
+
+- Vidly 
+
+  - **[movies.jsx](./vidly/src/components/movies.jsx)**
+
+  - **[like.jsx](./vidly/src/components/common/like.jsx)**
+
+  - **[App.js](./vidly/src/App.js)**
+
+  - <font color=red>特别指出一点 below的代码中 movie object本身没身`.liked` 这个property 但是可以通过clone这个obj 然后加 `点` 的形式访问 添加一个新的property进去</font>
+
+    ```js
+      handleLike = (movie) => {
+        const movies = [...this.state.movies];
+        const index = movies.indexOf(movie);
+        movies[index] = { ...movies[index] };
+        movies[index].liked = !movies[index].liked;
+        this.setState({ movies });
+      };
+    ```
 
 [Back to top](#react)
 
@@ -987,6 +1011,10 @@ Example:
 
 - **cannot call hooks inside loops, condition or nested functions** 
 
+[Back to top](#react)
+
+---
+
 ## useEffect
 
 - Implement all the logic in `useEffect()`
@@ -1010,6 +1038,10 @@ useEffect 里面不能直接写 async
 
 ![](./images/fetchingDataHooks.png)
 
+[Back to top](#react)
+
+---
+
 ## custom hooks
 
 ```jsx
@@ -1026,7 +1058,15 @@ export default function useDocumentTitle(title) {
 }
 ```
 
+[Back to top](#react)
+
+---
+
 ## Context
 
 ![](./images/useContext.png)
+
+[Back to top](#react)
+
+---
 
