@@ -6,3 +6,9 @@
 lsof -i
 ```
 
+# ffmpeg
+
+```bash
+ffmpeg -i input.mov -c copy output.mp4    
+```
+
