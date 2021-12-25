@@ -21,8 +21,3 @@ if [ -n "$msg" ]; then
 else
    red "Please add commit message e.g. (bash gitauto.sh \"commit message\")"
 fi
-
-
-
-
-
