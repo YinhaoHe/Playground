@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "webpack-cli": "^2.0.14"
+    "webpack-cli": "^5.0.1"
   },
   "scripts": {
     "build": "webpack -w",
